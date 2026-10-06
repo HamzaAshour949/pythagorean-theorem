@@ -37,6 +37,7 @@
   }
   @supports (width:1cqw){#stage{--u:calc(100cqw/11.7)}}
   #scene,#back,#layer,#frame{position:absolute;inset:0}
+  #layer{z-index:1}#frame{z-index:2}               /* squares (whatever their raise-to-front number) always stay below the triangle outline and the name tag */
   #frame{pointer-events:none}
   .bx{position:absolute;box-sizing:border-box;left:calc(var(--u)*var(--x));top:calc(var(--u)*var(--y));width:calc(var(--u)*var(--w));height:calc(var(--u)*var(--h))}
   .sqA{background:#fff6e3;border:calc(var(--u)*.07) solid #d97706}
