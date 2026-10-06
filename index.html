@@ -59,7 +59,9 @@
          color:#fff;font-weight:700;font-size:calc(var(--u)*.38);line-height:1;display:grid;place-items:center}
   .piece{position:absolute;left:0;top:0;width:var(--u);height:var(--u);margin:calc(var(--u)*-.5) 0 0 calc(var(--u)*-.5);cursor:grab;
          transform:translate(calc(var(--u)*var(--x)),calc(var(--u)*var(--y))) rotate(var(--r)) scale(var(--s))}
-  .piece.drag{cursor:grabbing;filter:drop-shadow(0 calc(var(--u)*.1) calc(var(--u)*.1) rgba(17,24,39,.35))}
+  .piece.drag{cursor:grabbing}
+  .piece.drag .inner{box-shadow:0 calc(var(--u)*.1) calc(var(--u)*.14) rgba(17,24,39,.35),inset 0 0 0 calc(var(--u)*.035) rgba(255,255,255,.38)}
+  .piece.mv{will-change:transform}
   .inner{position:absolute;inset:6%;border-radius:calc(var(--u)*.11);border:calc(var(--u)*.045) solid;
          box-shadow:inset 0 0 0 calc(var(--u)*.035) rgba(255,255,255,.38);transition:scale .15s}
   /* faces: happy by default, scared while grabbed */
@@ -76,6 +78,70 @@
          border:calc(var(--u)*.05) solid #2b1a4d;border-top:0;border-radius:0 0 calc(var(--u)*.3) calc(var(--u)*.3);transition:all .12s}
   .inner i.sweat{display:none;right:calc(var(--u)*.02);top:calc(var(--u)*.03);width:calc(var(--u)*.11);height:calc(var(--u)*.11);
          background:#7dd3fc;border-radius:50% 0 50% 50%;transform:rotate(45deg);border:calc(var(--u)*.015) solid #fff}
+
+  /* ---------- personalities: accessories ---------- */
+  #stage{--c:calc(var(--u)*.01)}
+  .inner i.hair,.inner i.glasses,.inner i.acc,.inner i.acc2,.inner i.fx{display:none}
+  .inner i.fx{left:58%;top:calc(var(--c)*-34);font-style:normal;font-weight:800;font-size:calc(var(--u)*.36);line-height:1;white-space:nowrap}
+  .inner i.hair{left:calc(var(--c)*-3);right:calc(var(--c)*-3);top:calc(var(--c)*-6);height:calc(var(--c)*28);background:var(--hc,#222);border-radius:60% 60% 20% 20% / 100% 100% 45% 45%}
+  .piece[class*="hr-"] .inner i.hair{display:block}
+  .hr-long .inner i.hair::before,.hr-long .inner i.hair::after{content:"";position:absolute;top:calc(var(--c)*10);width:calc(var(--c)*14);height:calc(var(--c)*62);background:var(--hc);border-radius:0 0 99px 99px}
+  .hr-long .inner i.hair::before{left:calc(var(--c)*3)}.hr-long .inner i.hair::after{right:calc(var(--c)*3)}
+  .hr-bun .inner i.hair::after{content:"";position:absolute;left:50%;top:calc(var(--c)*-22);width:calc(var(--c)*26);height:calc(var(--c)*26);margin-left:calc(var(--c)*-13);border-radius:50%;background:var(--hc)}
+  .hr-pony .inner i.hair::after{content:"";position:absolute;right:calc(var(--c)*-14);top:calc(var(--c)*4);width:calc(var(--c)*22);height:calc(var(--c)*44);border-radius:50%;background:var(--hc);transform:rotate(14deg)}
+  .hr-pig .inner i.hair::before,.hr-pig .inner i.hair::after{content:"";position:absolute;top:calc(var(--c)*6);width:calc(var(--c)*22);height:calc(var(--c)*22);border-radius:50%;background:var(--hc)}
+  .hr-pig .inner i.hair::before{left:calc(var(--c)*-14)}.hr-pig .inner i.hair::after{right:calc(var(--c)*-14)}
+  .hr-spiky .inner i.hair{border-radius:0;height:calc(var(--c)*32);top:calc(var(--c)*-12);clip-path:polygon(0 100%,0 45%,10% 0,22% 42%,36% 4%,50% 44%,64% 4%,78% 42%,90% 0,100% 45%,100% 100%)}
+  .hr-cloud .inner i.hair{background:transparent;height:0;top:0}
+  .hr-cloud .inner i.hair::before{content:"";position:absolute;left:50%;top:calc(var(--c)*-14);width:calc(var(--c)*30);height:calc(var(--c)*30);margin-left:calc(var(--c)*-15);border-radius:50%;background:var(--hc);
+     box-shadow:calc(var(--c)*-20) calc(var(--c)*10) 0 calc(var(--c)*-2) var(--hc),calc(var(--c)*20) calc(var(--c)*10) 0 calc(var(--c)*-2) var(--hc),calc(var(--c)*-9) calc(var(--c)*-8) 0 calc(var(--c)*3) var(--hc),calc(var(--c)*10) calc(var(--c)*-7) 0 calc(var(--c)*2) var(--hc)}
+  .hr-hijab .inner i.hair{left:0;right:0;top:0;height:auto;bottom:0;border-radius:inherit;
+     background:radial-gradient(ellipse 33% 40% at 50% 55%,transparent 96%,var(--hc) 100%)}
+  .hr-down .inner i.hair{left:calc(var(--c)*-8);right:calc(var(--c)*-8);top:calc(var(--c)*-11);height:calc(var(--c)*36);border-radius:50% 50% 30% 30% / 85% 85% 30% 30%}
+  .hr-down .inner i.hair::before,.hr-down .inner i.hair::after{content:"";position:absolute;top:calc(var(--c)*14);width:calc(var(--c)*16);height:calc(var(--c)*52);background:var(--hc);border-radius:calc(var(--c)*6) calc(var(--c)*6) 99px 99px;transform-origin:50% 0}
+  .hr-down .inner i.hair::before{left:calc(var(--c)*-1);transform:rotate(5deg)}
+  .hr-down .inner i.hair::after{right:calc(var(--c)*-1);transform:rotate(-5deg)}
+  .hr-semi .inner i.hair{background:transparent;height:0;top:0}
+  .hr-semi .inner i.hair::before,.hr-semi .inner i.hair::after{content:"";position:absolute;top:calc(var(--c)*5);width:calc(var(--c)*13);height:calc(var(--c)*30);background:var(--hc);border-radius:calc(var(--c)*8) calc(var(--c)*8) calc(var(--c)*12) calc(var(--c)*12)}
+  .hr-semi .inner i.hair::before{left:calc(var(--c)*3)}.hr-semi .inner i.hair::after{right:calc(var(--c)*3)}
+  .gl .inner i.glasses{display:block;left:50%;top:calc(50% + calc(var(--c)*-7));width:calc(var(--c)*13);height:0;margin-left:calc(var(--c)*-6.5);border-top:calc(var(--c)*2.5) solid #1f2937}
+  .gl .inner i.glasses::before,.gl .inner i.glasses::after{content:"";position:absolute;top:calc(var(--c)*-9.5);width:calc(var(--c)*19);height:calc(var(--c)*19);border:calc(var(--c)*2.5) solid #1f2937;border-radius:50%;background:rgba(255,255,255,.22)}
+  .gl .inner i.glasses::before{left:calc(var(--c)*-19)}.gl .inner i.glasses::after{left:calc(var(--c)*13)}
+  .brows .eye::before{opacity:1;background:#4b5563}
+  .brows .eye.l::before{transform:rotate(8deg)}.brows .eye.r::before{transform:rotate(-8deg)}
+  .ac-tie .inner i.acc{display:block;left:50%;bottom:calc(var(--c)*2);width:calc(var(--c)*16);height:calc(var(--c)*16);margin-left:calc(var(--c)*-8);background:#b91c1c;clip-path:polygon(32% 0,68% 0,60% 22%,84% 100%,50% 86%,16% 100%,40% 22%)}
+  .ac-crown .inner i.acc{display:block;left:50%;top:calc(var(--c)*-24);width:calc(var(--c)*34);height:calc(var(--c)*22);margin-left:calc(var(--c)*-17);background:#fbbf24;clip-path:polygon(0 100%,0 18%,25% 58%,50% 0,75% 58%,100% 18%,100% 100%)}
+  .a2-mustache .inner i.acc2{display:block;left:50%;top:calc(50% + calc(var(--c)*-1));width:calc(var(--c)*30);height:calc(var(--c)*9);margin-left:calc(var(--c)*-15);background:#374151;border-radius:99px 99px calc(var(--c)*4) calc(var(--c)*4)}
+  .a2-headset .inner i.acc2{display:block;left:calc(var(--c)*-5);right:calc(var(--c)*-5);top:calc(var(--c)*-12);height:calc(var(--c)*40);border:calc(var(--c)*5) solid #374151;border-bottom:0;border-radius:99px 99px 0 0}
+  .a2-headset .inner i.acc2::before,.a2-headset .inner i.acc2::after{content:"";position:absolute;top:calc(var(--c)*28);width:calc(var(--c)*12);height:calc(var(--c)*18);background:#374151;border-radius:calc(var(--c)*4)}
+  .a2-headset .inner i.acc2::before{left:calc(var(--c)*-9)}.a2-headset .inner i.acc2::after{right:calc(var(--c)*-9)}
+  .a2-earrings .inner i.acc2{display:block;left:calc(var(--c)*-4);right:calc(var(--c)*-4);top:calc(50% + calc(var(--c)*6));height:0}
+  .a2-earrings .inner i.acc2::before,.a2-earrings .inner i.acc2::after{content:"";position:absolute;top:0;width:calc(var(--c)*9);height:calc(var(--c)*9);border-radius:50%;background:#fbbf24;border:calc(var(--c)*1.5) solid #b45309}
+  .a2-earrings .inner i.acc2::before{left:0}.a2-earrings .inner i.acc2::after{right:0}
+  .lips .mouth{border-color:#dc2626}
+  .inner i.beard{display:none}
+  .bd .inner i.beard{display:block;left:0;right:0;bottom:0;height:calc(var(--c)*37);background:#1a1210;border-radius:calc(var(--c)*34) calc(var(--c)*34) calc(var(--c)*9) calc(var(--c)*9) / calc(var(--c)*20) calc(var(--c)*20) calc(var(--c)*9) calc(var(--c)*9)}
+  .bd .mouth{border-color:#efe2d3}
+  .bd .inner i.acc2{background:#1a1210}
+
+  /* ---------- personalities: resting faces ---------- */
+  .piece.i-small .eye{width:calc(var(--c)*8);height:calc(var(--c)*8);margin:calc(var(--c)*-4) 0 0 calc(var(--c)*-4)}
+  .piece.i-flat .mouth,.piece.i-bored .mouth,.piece.i-meh .mouth{width:calc(var(--c)*22);height:0;margin-left:calc(var(--c)*-11);border:0;border-top:calc(var(--c)*4) solid #2b1a4d;border-radius:4px;top:calc(50% + calc(var(--c)*11))}
+  .piece.i-meh .mouth{transform:rotate(-7deg)}
+  .piece.i-bored .eye,.piece.i-meh .eye{height:calc(var(--c)*7);width:calc(var(--c)*15);margin:calc(var(--c)*-1) 0 0 calc(var(--c)*-7.5);border-radius:0 0 99px 99px}
+  .piece.i-shy .cheek{opacity:1;width:calc(var(--c)*17);height:calc(var(--c)*11)}
+  .piece.i-shy .mouth{width:calc(var(--c)*20);height:calc(var(--c)*10);margin-left:calc(var(--c)*-10)}
+  .piece.i-poised .mouth{width:calc(var(--c)*28);height:calc(var(--c)*9);margin-left:calc(var(--c)*-14);top:calc(50% + calc(var(--c)*7));border-width:0 0 calc(var(--c)*3.5) 0;border-radius:0 0 calc(var(--c)*28) calc(var(--c)*28)}
+  .piece.i-soft .mouth{width:calc(var(--c)*34);height:calc(var(--c)*17);margin-left:calc(var(--c)*-17)}
+  .piece.i-full .cheek{width:calc(var(--c)*26);height:calc(var(--c)*22);margin-left:calc(var(--c)*-13);top:calc(50% + calc(var(--c)*2));opacity:.42}
+  .piece.i-full .cheek.l{left:calc(50% - calc(var(--c)*31))}.piece.i-full .cheek.r{left:calc(50% + calc(var(--c)*31))}
+  .piece.i-full .mouth{width:calc(var(--c)*38);height:calc(var(--c)*19);margin-left:calc(var(--c)*-19)}
+  .piece.i-full .inner{box-shadow:inset 0 0 calc(var(--c)*18) rgba(255,255,255,.28),inset 0 0 0 calc(var(--u)*.035) rgba(255,255,255,.38)}
+  .piece.drag.i-full .inner{box-shadow:0 calc(var(--u)*.1) calc(var(--u)*.14) rgba(17,24,39,.35),inset 0 0 calc(var(--c)*18) rgba(255,255,255,.28),inset 0 0 0 calc(var(--u)*.035) rgba(255,255,255,.38)}
+  .piece.i-curious .eye{width:calc(var(--c)*15);height:calc(var(--c)*15);margin:calc(var(--c)*-7.5) 0 0 calc(var(--c)*-7.5)}
+  .piece.i-curious .mouth{width:calc(var(--c)*18);height:calc(var(--c)*14);margin-left:calc(var(--c)*-9);background:#7a2d4a}
+  .piece.i-cheer .mouth{width:calc(var(--c)*28);height:calc(var(--c)*15);margin-left:calc(var(--c)*-14);top:calc(50% + calc(var(--c)*4));background:#7a2d4a;border:calc(var(--c)*3) solid #2b1a4d;border-top:0;border-radius:0 0 calc(var(--c)*28) calc(var(--c)*28)}
+  .piece.i-chatty .mouth{width:calc(var(--c)*28);height:calc(var(--c)*17);margin-left:calc(var(--c)*-14);background:#7a2d4a}
   .piece.drag .eye{width:calc(var(--u)*.2);height:calc(var(--u)*.2);margin:calc(var(--u)*-.1) 0 0 calc(var(--u)*-.1);
        background:radial-gradient(circle,#2b1a4d 0 30%,#fff 34%);border:calc(var(--u)*.035) solid #2b1a4d}
   .piece.drag .eye::before{opacity:1}
@@ -92,14 +158,145 @@
   .piece.joy:not(.drag) .mouth::after{content:"";position:absolute;left:22%;right:22%;bottom:0;height:50%;background:#ff7a9a;border-radius:99px 99px 0 0}
   .piece.joy:not(.drag) .cheek{opacity:.9;width:calc(var(--u)*.16);height:calc(var(--u)*.1)}
   .piece.joy:not(.drag) .inner{scale:1.08}
-  .piece.a .inner{background:#f59e0b;border-color:#d97706}
-  .piece.b .inner{background:#0ea5e9;border-color:#0284c7}
+  .piece.a .inner{background:var(--bg,#f59e0b);border-color:var(--bd,#d97706)}
+  .piece.b .inner{background:var(--bg,#0ea5e9);border-color:var(--bd,#0284c7)}
   .piece:hover .inner{scale:1.06}
+
+  /* ---------- personalities: Spider-Man ---------- */
+  .piece.spider .inner{background:
+     radial-gradient(circle,transparent 0 22%,rgba(0,0,0,.35) 23% 25%,transparent 26% 44%,rgba(0,0,0,.35) 45% 47%,transparent 48%),
+     linear-gradient(90deg,transparent 49.2%,rgba(0,0,0,.35) 49.2% 50.8%,transparent 50.8%),
+     linear-gradient(0deg,transparent 49.2%,rgba(0,0,0,.35) 49.2% 50.8%,transparent 50.8%),
+     linear-gradient(45deg,transparent 49.4%,rgba(0,0,0,.3) 49.4% 50.6%,transparent 50.6%),
+     linear-gradient(135deg,transparent 49.4%,rgba(0,0,0,.3) 49.4% 50.6%,transparent 50.6%),#dc2626}
+  .piece.spider .eye{width:calc(var(--c)*26);height:calc(var(--c)*17);margin:calc(var(--c)*-8) 0 0 calc(var(--c)*-13);background:#fff;border:calc(var(--c)*3.5) solid #111;border-radius:50% 50% 50% 50% / 70% 70% 40% 40%}
+  .piece.spider .eye.l{transform:rotate(16deg)}.piece.spider .eye.r{transform:rotate(-16deg)}
+  .piece.spider .mouth,.piece.spider .cheek{display:none}
+
+  /* ---------- personalities: how each one reacts when picked up ---------- */
+  .piece.drag[class*="rx-"] .inner i.fx{display:block}
+  .piece.drag[class*="rx-"] .inner i.sweat{display:none}
+  .piece.drag[class*="rx-"] .eye::before{opacity:0}
+  .piece.drag.rx-calm .inner,.piece.drag.rx-bstar .inner,.piece.drag.rx-glad .inner,.piece.drag.rx-happy .inner,.piece.drag.rx-smile .inner,.piece.drag.rx-poised .inner,.piece.drag.rx-shy .inner,.piece.drag.rx-bulb .inner,.piece.drag.rx-proud .inner,.piece.drag.rx-ask .inner,
+  .piece.drag.rx-yawn .inner,.piece.drag.rx-shrug .inner,.piece.drag.rx-think .inner,.piece.drag.rx-chat .inner,.piece.drag.rx-hearts .inner,.piece.drag.rx-soft .inner,.piece.drag.rx-softstar .inner,.piece.drag.rx-stern .inner,.piece.drag.rx-smug .inner,.piece.drag.rx-spidey .inner{animation:none}
+  /* eyes */
+  .piece.drag.rx-calm .eye,.piece.drag.rx-bstar .eye,.piece.drag.rx-smile .eye,.piece.drag.rx-poised .eye,.piece.drag.rx-think .eye,.piece.drag.rx-bulb .eye,.piece.drag.rx-ask .eye,.piece.drag.rx-chat .eye,.piece.drag.rx-stern .eye,.piece.drag.rx-bounce .eye{
+     width:calc(var(--c)*14);height:calc(var(--c)*14);margin:calc(var(--c)*-7) 0 0 calc(var(--c)*-7);background:#2b1a4d;border:0}
+  .piece.drag.rx-proud .eye,.piece.drag.rx-happy .eye,.piece.drag.rx-glad .eye,.piece.drag.rx-hearts .eye,.piece.drag.rx-soft .eye,.piece.drag.rx-softstar .eye{width:calc(var(--c)*18);height:calc(var(--c)*10);margin:calc(var(--c)*-3) 0 0 calc(var(--c)*-9);background:transparent;border:0;border-top:calc(var(--c)*5) solid #2b1a4d;border-radius:99px 99px 0 0}
+  .piece.drag.rx-shy .eye{width:calc(var(--c)*16);height:calc(var(--c)*8);margin:calc(var(--c)*-2) 0 0 calc(var(--c)*-8);background:transparent;border:0;border-bottom:calc(var(--c)*4) solid #2b1a4d;border-radius:0 0 99px 99px}
+  .piece.drag.rx-yawn .eye{width:calc(var(--c)*16);height:calc(var(--c)*5);margin:calc(var(--c)*-2) 0 0 calc(var(--c)*-8);background:#2b1a4d;border:0;border-radius:99px}
+  .piece.drag.rx-shrug .eye,.piece.drag.rx-smug .eye,.piece.drag.rx-chill .eye{height:calc(var(--c)*7);width:calc(var(--c)*15);margin:calc(var(--c)*-1) 0 0 calc(var(--c)*-7.5);background:#2b1a4d;border:0;border-radius:0 0 99px 99px}
+  .piece.drag.rx-spidey .eye{height:calc(var(--c)*11);background:#fff;border:calc(var(--c)*3.5) solid #111}
+  .piece.drag.rx-stern .eye::before{opacity:1}
+  .piece.drag.rx-stern .eye.l::before{transform:rotate(18deg)}.piece.drag.rx-stern .eye.r::before{transform:rotate(-18deg)}
+  /* mouths */
+  .piece.drag.rx-calm .mouth,.piece.drag.rx-stern .mouth,.piece.drag.rx-shrug .mouth{width:calc(var(--c)*22);height:0;margin-left:calc(var(--c)*-11);top:calc(50% + calc(var(--c)*11));border:0;border-top:calc(var(--c)*4) solid #2b1a4d;border-radius:4px;background:transparent}
+  .piece.drag.rx-shrug .mouth{transform:rotate(-7deg)}
+  .piece.drag.rx-poised .mouth{width:calc(var(--c)*28);height:calc(var(--c)*9);margin-left:calc(var(--c)*-14);top:calc(50% + calc(var(--c)*7));border:0 solid #2b1a4d;border-bottom:calc(var(--c)*3.5) solid #2b1a4d;border-radius:0 0 calc(var(--c)*28) calc(var(--c)*28);background:transparent}
+  .piece.drag.rx-shy .mouth{width:calc(var(--c)*14);height:0;margin-left:calc(var(--c)*-7);top:calc(50% + calc(var(--c)*10));border:0;border-top:calc(var(--c)*3) solid #2b1a4d;border-radius:4px;background:transparent}
+  .piece.drag.rx-bulb .mouth,.piece.drag.rx-bstar .mouth,.piece.drag.rx-smile .mouth,.piece.drag.rx-hearts .mouth,.piece.drag.rx-soft .mouth,.piece.drag.rx-softstar .mouth,.piece.drag.rx-think .mouth,.piece.drag.rx-chill .mouth{width:calc(var(--c)*34);height:calc(var(--c)*17);margin-left:calc(var(--c)*-17);top:calc(50% + calc(var(--c)*3));border:calc(var(--c)*5) solid #2b1a4d;border-top:0;border-radius:0 0 calc(var(--c)*34) calc(var(--c)*34);background:transparent}
+  .piece.drag.rx-proud .mouth,.piece.drag.rx-happy .mouth,.piece.drag.rx-glad .mouth{width:calc(var(--c)*34);height:calc(var(--c)*22);margin-left:calc(var(--c)*-17);top:calc(50% + calc(var(--c)*1));border:calc(var(--c)*4) solid #2b1a4d;border-top-width:calc(var(--c)*4);border-radius:calc(var(--c)*3) calc(var(--c)*3) calc(var(--c)*34) calc(var(--c)*34);background:#7a2d4a}
+  .piece.drag.rx-ask .mouth,.piece.drag.rx-chat .mouth{width:calc(var(--c)*22);height:calc(var(--c)*18);margin-left:calc(var(--c)*-11);top:calc(50% + calc(var(--c)*4));border:calc(var(--c)*3) solid #2b1a4d;border-radius:0 0 calc(var(--c)*22) calc(var(--c)*22);background:#7a2d4a;animation:talk .22s ease-in-out infinite}
+  .piece.drag.rx-chat .mouth{animation-duration:.14s}
+  .piece.drag.rx-yawn .mouth{width:calc(var(--c)*22);height:calc(var(--c)*32);margin-left:calc(var(--c)*-11);top:calc(50% + calc(var(--c)*2));border:calc(var(--c)*4) solid #2b1a4d;border-radius:50%;background:#7a2d4a}
+  .piece.drag.rx-scream .mouth{width:calc(var(--c)*34);height:calc(var(--c)*40);margin-left:calc(var(--c)*-17);top:calc(50% + calc(var(--c)*1))}
+  .piece.drag.rx-bounce .mouth{width:calc(var(--c)*14);height:calc(var(--c)*16);margin-left:calc(var(--c)*-7);top:calc(50% + calc(var(--c)*6));border:calc(var(--c)*3) solid #2b1a4d;border-radius:50%;background:#7a2d4a}
+  .piece.drag.rx-smug .mouth{width:calc(var(--c)*26);height:calc(var(--c)*12);margin-left:calc(var(--c)*-13);top:calc(50% + calc(var(--c)*6));border:calc(var(--c)*4) solid #2b1a4d;border-top:0;border-radius:0 0 calc(var(--c)*26) 0;background:transparent;transform:rotate(-8deg)}
+  /* movement */
+  .piece.drag.rx-scream .inner{animation:shake .06s linear infinite}
+  .piece.drag.rx-scream .inner i.sweat{display:block}
+  .piece.drag.rx-shy .inner{animation:wiggle .45s ease-in-out infinite}
+  .piece.drag.rx-bounce .inner{animation:hop .16s ease-in-out infinite}
+  .piece.drag.rx-shrug .inner{rotate:-7deg}
+  /* little extras above the head */
+  .rx-scream .fx::before{content:"!!!";color:#ef4444}
+  .rx-calm .fx::before{content:"...";color:#6b7280}
+  .rx-ask .fx::before{content:"?";color:#2563eb}
+  .rx-chat .fx::before{content:"\2026";color:#6b7280}
+  .rx-yawn .fx::before{content:"Zzz";color:#6b7280}
+  .rx-hearts .fx::before{content:"\2665";color:#ec4899}
+  .rx-bstar .fx::before{content:"\2605";color:#f59e0b}
+  .rx-softstar .fx::before{content:"\2605";color:#f59e0b}
+  .rx-proud .fx::before{content:"\2605";color:#f59e0b}
+  .rx-spidey .fx::before{content:"\\ | /";color:#dc2626}
+  .rx-bulb .fx::before,.rx-happy .fx::before{content:"";display:block;width:calc(var(--c)*16);height:calc(var(--c)*16);border-radius:50%;background:#fde047;box-shadow:0 0 0 calc(var(--c)*3) #fbbf24,0 0 calc(var(--c)*14) calc(var(--c)*6) rgba(250,204,21,.6)}
+  .piece.drag.rx-think .eye.r::before{opacity:1;background:#2b1a4d;transform:rotate(-12deg)}
+  .rx-think .fx::before{content:"?";color:#2563eb;animation:qa 1.8s ease-in-out infinite}
+  .rx-think .fx::after{content:"";position:absolute;left:calc(var(--c)*1);top:calc(var(--c)*5);width:calc(var(--c)*16);height:calc(var(--c)*16);border-radius:50%;background:#fde047;box-shadow:0 0 0 calc(var(--c)*3) #fbbf24,0 0 calc(var(--c)*14) calc(var(--c)*6) rgba(250,204,21,.6);opacity:0;animation:qb 1.8s ease-in-out infinite}
+  @keyframes qa{0%,42%{opacity:1}58%,100%{opacity:0}}
+  @keyframes qb{0%,42%{opacity:0}58%,100%{opacity:1}}
+  .piece.drag.rx-chill .inner{animation:sway 2.6s ease-in-out infinite}
+  .rx-chill .fx::before{content:"\2605";color:#f59e0b}
+  @keyframes sway{0%,100%{rotate:-1.5deg}50%{rotate:1.5deg}}
+  @keyframes slowp{0%,100%{opacity:.25}50%{opacity:1}}
+  @keyframes talk{0%,100%{height:calc(var(--c)*8)}50%{height:calc(var(--c)*22)}}
+  @keyframes shake{0%,100%{translate:calc(var(--c)*2) 0}50%{translate:calc(var(--c)*-2) calc(var(--c)*1)}}
+  @keyframes wiggle{0%,100%{rotate:-4deg}50%{rotate:4deg}}
+  @keyframes hop{0%,100%{translate:0 0}50%{translate:0 calc(var(--c)*-5)}}
+
+  /* the name tag that pops up while a square is held */
+  #tag{position:absolute;z-index:9;left:calc(var(--u)*var(--cx,0));top:calc(var(--u)*var(--cy,0));transform:translate(-50%,-100%) scale(.6);opacity:0;pointer-events:none;
+       background:#111827;color:#fff;font-weight:700;font-size:calc(var(--u)*.4);line-height:1;white-space:nowrap;
+       padding:calc(var(--u)*.14) calc(var(--u)*.32);border-radius:99px;box-shadow:0 4px 12px rgba(17,24,39,.3);transition:opacity .12s,transform .16s cubic-bezier(.3,1.6,.5,1)}
+  #tag::after{content:"";position:absolute;left:50%;bottom:calc(var(--u)*-.1);width:calc(var(--u)*.2);height:calc(var(--u)*.2);margin-left:calc(var(--u)*-.1);background:#111827;transform:rotate(45deg);border-radius:2px}
+  #tag.show{opacity:1;transform:translate(-50%,-100%) scale(1)}
+  /* Salma: cute (sparkly eyes, rosy cheeks, a little flower on her hijab) */
+  .c-salma:not(.drag) .eye{background:radial-gradient(circle at 35% 32%,#fff 0 22%,#2b1a4d 25%)}
+  .ac-flower .inner i.acc{display:block;right:calc(var(--c)*17);top:calc(var(--c)*6);width:calc(var(--c)*8);height:calc(var(--c)*8);border-radius:50%;background:#fde047;
+     box-shadow:calc(var(--c)*-8) 0 0 calc(var(--c)*-1) #fb7185,calc(var(--c)*8) 0 0 calc(var(--c)*-1) #fb7185,0 calc(var(--c)*-8) 0 calc(var(--c)*-1) #fb7185,0 calc(var(--c)*8) 0 calc(var(--c)*-1) #fb7185}
+  .piece.girl:not(.drag):not(.joy) .cheek{width:calc(var(--c)*15);height:calc(var(--c)*10);opacity:.6;background:#ff6fa5}
+  /* Tala, Salma, Jana and Sama stay still while held: faces only, no hopping or wiggling */
+  .piece.drag.c-tala .inner,.piece.drag.c-salma .inner,.piece.drag.c-jana .inner,.piece.drag.c-sama .inner{animation:none}
+  /* characters switched off: plain coloured squares, no faces, no name tag */
+  #stage.plain .inner > i{display:none!important}
+  #stage.plain .piece.a .inner{background:#f59e0b;border-color:#d97706}
+  #stage.plain .piece.b .inner{background:#0ea5e9;border-color:#0284c7}
+  #stage.plain .piece .inner{animation:none!important;box-shadow:inset 0 0 0 calc(var(--u)*.035) rgba(255,255,255,.38)}
+  #stage.plain .piece.drag .inner{box-shadow:0 calc(var(--u)*.1) calc(var(--u)*.14) rgba(17,24,39,.35),inset 0 0 0 calc(var(--u)*.035) rgba(255,255,255,.38)}
+  #stage.plain #tag{display:none}
+  .slot.hot{background:#e0e7ff!important;border:calc(var(--u)*.06) solid #4f46e5!important}
+  .web{position:absolute;left:calc(var(--u)*var(--cx));top:calc(var(--u)*var(--cy));height:calc(var(--u)*.05);margin-top:calc(var(--u)*-.025);background:#f8fafc;
+       border-radius:9px;transform-origin:0 50%;box-shadow:0 0 0 calc(var(--u)*.022) #94a3b8;pointer-events:none;z-index:4;transition:opacity .25s}
+  .web.fade{opacity:0}
+  /* thrown out of the boxes: they cry (Mr. Ayman is furious; Azad webs his way back) */
+  .piece.out:not(.drag) .eye{width:calc(var(--c)*16);height:calc(var(--c)*8);margin:calc(var(--c)*-2) 0 0 calc(var(--c)*-8);background:transparent;border:0;border-bottom:calc(var(--c)*4) solid #2b1a4d;border-radius:0 0 99px 99px}
+  .piece.out:not(.drag) .eye::before{opacity:1;background:#2b1a4d}
+  .piece.out:not(.drag) .mouth{width:calc(var(--c)*22);height:calc(var(--c)*14);margin-left:calc(var(--c)*-11);top:calc(50% + calc(var(--c)*8));border:calc(var(--c)*4) solid #2b1a4d;border-bottom:0;border-radius:99px 99px 0 0;background:#7a2d4a}
+  .piece.out:not(.drag) .cheek{opacity:.2}
+  /* tears shoot out sideways and arc away; the whole square keeps tilting while it cries */
+  .piece.out:not(.drag) .inner{animation:cry .75s ease-in-out infinite}
+  .piece.out:not(.drag) .eye::after,.piece.out:not(.drag) .inner i.sweat::before,.piece.out:not(.drag) .inner i.sweat::after{
+     content:"";position:absolute;width:calc(var(--c)*21);height:calc(var(--c)*30);margin:calc(var(--c)*-10) 0 0 calc(var(--c)*-10);left:50%;top:60%;background:#38bdf8;border:calc(var(--c)*2) solid #fff;border-radius:50% 50% 60% 60%;
+     box-shadow:0 0 0 calc(var(--c)*1.2) #0ea5e9;opacity:0}
+  .piece.out:not(.drag) .eye.l::after{animation:tearL .9s ease-out infinite}
+  .piece.out:not(.drag) .eye.r::after{animation:tearR .9s ease-out infinite}
+  .piece.out:not(.drag) .inner i.sweat{display:block;left:50%;top:calc(50% - calc(var(--c)*7));width:0;height:0;background:none;border:0;transform:none}
+  .piece.out:not(.drag) .inner i.sweat::before{left:calc(var(--c)*-16);top:0;animation:tearL2 .9s ease-out .45s infinite}
+  .piece.out:not(.drag) .inner i.sweat::after{left:calc(var(--c)*16);top:0;animation:tearR2 .9s ease-out .45s infinite}
+  @keyframes cry{0%,100%{rotate:-10deg}50%{rotate:10deg}}
+  @keyframes tearL{0%{transform:translate(0,0) scale(.5);opacity:0}10%{opacity:1}38%{transform:translate(calc(var(--c)*-30),calc(var(--c)*-24)) scale(1)}100%{transform:translate(calc(var(--c)*-86),calc(var(--c)*46)) scale(.9) rotate(-40deg);opacity:0}}
+  @keyframes tearR{0%{transform:translate(0,0) scale(.5);opacity:0}10%{opacity:1}38%{transform:translate(calc(var(--c)*30),calc(var(--c)*-24)) scale(1)}100%{transform:translate(calc(var(--c)*86),calc(var(--c)*46)) scale(.9) rotate(40deg);opacity:0}}
+  @keyframes tearL2{0%{transform:translate(0,0) scale(.5);opacity:0}10%{opacity:1}35%{transform:translate(calc(var(--c)*-52),calc(var(--c)*-40)) scale(1.1)}100%{transform:translate(calc(var(--c)*-120),calc(var(--c)*62)) scale(.9) rotate(-60deg);opacity:0}}
+  @keyframes tearR2{0%{transform:translate(0,0) scale(.5);opacity:0}10%{opacity:1}35%{transform:translate(calc(var(--c)*52),calc(var(--c)*-40)) scale(1.1)}100%{transform:translate(calc(var(--c)*120),calc(var(--c)*62)) scale(.9) rotate(60deg);opacity:0}}
+  .piece.out.c-ayman:not(.drag) .inner{background:#c2410c;border-color:#7c2d12;animation:shake .07s linear infinite}
+  .piece.out.c-ayman:not(.drag) .eye{width:calc(var(--c)*12);height:calc(var(--c)*12);margin:calc(var(--c)*-6) 0 0 calc(var(--c)*-6);background:#2b1a4d;border:0;border-radius:50%}
+  .piece.out.c-ayman:not(.drag) .eye::before{opacity:1;background:#1a1210;height:calc(var(--c)*5)}
+  .piece.out.c-ayman:not(.drag) .eye.l::before{transform:rotate(22deg)}
+  .piece.out.c-ayman:not(.drag) .eye.r::before{transform:rotate(-22deg)}
+  .piece.out.c-ayman:not(.drag) .eye::after,.piece.out.c-ayman:not(.drag) .inner i.sweat{display:none}
+  .piece.out.c-ayman:not(.drag) .mouth{width:calc(var(--c)*38);height:calc(var(--c)*22);margin-left:calc(var(--c)*-19);top:calc(50% + calc(var(--c)*8));border:calc(var(--c)*4) solid #efe2d3;border-radius:calc(var(--c)*5) calc(var(--c)*5) calc(var(--c)*20) calc(var(--c)*20);background:#7a2d4a}
+  .piece.out.c-ayman .inner i.fx{display:block}
+  .piece.out.c-ayman .fx::before{content:"!!!";color:#dc2626}
   #stage:not(.started) .hypline{animation:hint 1.8s ease-in-out infinite}
-  @keyframes hint{0%,100%{border-color:#4f46e5}50%{border-color:#a5b4fc}}
+  @keyframes hint{0%,100%{opacity:1}50%{opacity:.35}}
   .burst{width:0;height:0;pointer-events:none}
-  .ring{position:absolute;left:0;top:0;width:calc(var(--u)*.84);height:calc(var(--u)*.84);border:calc(var(--u)*.07) solid;border-radius:50%}
-  .dot{position:absolute;left:0;top:0;width:calc(var(--u)*.12);height:calc(var(--u)*.12);margin:calc(var(--u)*-.06) 0 0 calc(var(--u)*-.06);border-radius:50%}
+  .burst::before{content:"";position:absolute;left:0;top:0;width:calc(var(--u)*.84);height:calc(var(--u)*.84);border:calc(var(--u)*.07) solid var(--bc,#f59e0b);border-radius:50%;
+     transform:translate(-50%,-50%) scale(.5);opacity:0;animation:ringp .5s ease-out forwards}
+  .burst::after{content:"";position:absolute;left:0;top:0;width:calc(var(--u)*.12);height:calc(var(--u)*.12);margin:calc(var(--u)*-.06) 0 0 calc(var(--u)*-.06);border-radius:50%;background:#ffd23f;
+     box-shadow:calc(var(--u)*.85) 0 0 #ff6fa5,calc(var(--u)*-.85) 0 0 #7be0ff,0 calc(var(--u)*.85) 0 #fff,0 calc(var(--u)*-.85) 0 var(--bc,#f59e0b);
+     transform:scale(.35);opacity:0;animation:dotsp .5s cubic-bezier(.2,.8,.3,1) forwards}
+  @keyframes ringp{0%{transform:translate(-50%,-50%) scale(.5);opacity:.95}100%{transform:translate(-50%,-50%) scale(1.9);opacity:0}}
+  @keyframes dotsp{0%{transform:scale(.35);opacity:1}100%{transform:scale(1.2);opacity:0}}
 
   .panel{grid-area:panel;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(6px,1.1vh,10px) 8px;padding:2px 12px 6px}
   .card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 11px 9px;
@@ -109,7 +306,7 @@
   .num{font-weight:700;font-size:19px;line-height:1.1;white-space:nowrap;font-variant-numeric:tabular-nums}
   .num small{font-size:12px;font-weight:600;color:var(--muted)}
   .bar{height:5px;border-radius:99px;background:#eef0f6;overflow:hidden}
-  .bar span{display:block;height:100%;width:0;border-radius:99px;transition:width .3s ease}
+  .bar span{display:block;height:100%;width:100%;border-radius:99px;transform:scaleX(0);transform-origin:0 50%;transition:transform .35s ease-out}
 
   #result{grid-column:1/-1;display:grid;place-items:center;min-height:48px;text-align:center;direction:ltr;border-radius:12px;border:1px solid transparent;transition:background .3s,border-color .3s}
   .eqline{font-size:clamp(19px,5.4vw,26px);font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
@@ -134,6 +331,15 @@
   #auto{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 1px 2px rgba(79,70,229,.35)}
   #auto:hover{background:#4338ca}
   #auto:disabled{background:#eceef3;border-color:#eceef3;color:#9ca3af;box-shadow:none;cursor:default;transform:none}
+  #pers{position:absolute;top:8px;left:10px;width:42px;height:42px;padding:0;border-radius:50%;border:0;color:#fff;
+        background:linear-gradient(135deg,#8b5cf6,#ec4899);box-shadow:0 0 0 3px #fff,0 4px 16px rgba(139,92,246,.6)}
+  #pers svg{width:23px;height:23px;stroke-width:2.2}
+  #pers:hover{background:linear-gradient(135deg,#7c3aed,#db2777)}
+  #pers::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2.5px solid rgba(236,72,153,.75);pointer-events:none;animation:glow 1.8s ease-out infinite}
+  @keyframes glow{0%{transform:scale(.9);opacity:.95}100%{transform:scale(1.65);opacity:0}}
+  #pers[aria-pressed=false]{background:#e5e7eb;color:#6b7280;box-shadow:0 0 0 3px #fff}
+  #pers[aria-pressed=false]::after{display:none}
+  @media (prefers-reduced-motion:reduce){#pers::after{animation:none;opacity:.5}}
   #mute{position:absolute;top:10px;right:12px;width:38px;height:38px;padding:0;border-radius:50%}
   #mute svg{width:18px;height:18px}
 
@@ -171,6 +377,7 @@
 <header>
   <h1>Pythagorean Theorem Game</h1>
   <p class="sub">Drag the small squares into the big square. Will they fit exactly?</p>
+  <button id="pers" type="button" aria-label="Characters on or off" aria-pressed="true" title="Characters on / off"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></svg></button>
   <button id="mute" type="button" aria-label="Sound on or off" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/></svg></button>
   <noscript><div class="nojs">This game needs JavaScript. Open the file in Chrome, Safari or Edge (double-click it).</div></noscript>
 </header>
@@ -183,86 +390,86 @@
 <div class="bx sqB"  style="--x:0.35;--y:4.45;--w:4;--h:4"></div>
 <div class="bx hyp"  style="--x:5.35;--y:2.45;--w:5;--h:5;transform:rotate(-36.87deg)"></div>
 <div class="bx tri"  style="--x:4.35;--y:4.45;--w:3;--h:4"></div>
-<div class="bx slot sa"  style="--x:4.42;--y:8.52;--w:0.86;--h:0.86"></div>
-<div class="bx slot sa"  style="--x:5.42;--y:8.52;--w:0.86;--h:0.86"></div>
-<div class="bx slot sa"  style="--x:6.42;--y:8.52;--w:0.86;--h:0.86"></div>
-<div class="bx slot sa"  style="--x:4.42;--y:9.52;--w:0.86;--h:0.86"></div>
-<div class="bx slot sa"  style="--x:5.42;--y:9.52;--w:0.86;--h:0.86"></div>
-<div class="bx slot sa"  style="--x:6.42;--y:9.52;--w:0.86;--h:0.86"></div>
-<div class="bx slot sa"  style="--x:4.42;--y:10.52;--w:0.86;--h:0.86"></div>
-<div class="bx slot sa"  style="--x:5.42;--y:10.52;--w:0.86;--h:0.86"></div>
-<div class="bx slot sa"  style="--x:6.42;--y:10.52;--w:0.86;--h:0.86"></div>
-<div class="bx slot sb"  style="--x:0.42;--y:4.52;--w:0.86;--h:0.86"></div>
-<div class="bx slot sb"  style="--x:1.42;--y:4.52;--w:0.86;--h:0.86"></div>
-<div class="bx slot sb"  style="--x:2.42;--y:4.52;--w:0.86;--h:0.86"></div>
-<div class="bx slot sb"  style="--x:3.42;--y:4.52;--w:0.86;--h:0.86"></div>
-<div class="bx slot sb"  style="--x:0.42;--y:5.52;--w:0.86;--h:0.86"></div>
-<div class="bx slot sb"  style="--x:1.42;--y:5.52;--w:0.86;--h:0.86"></div>
-<div class="bx slot sb"  style="--x:2.42;--y:5.52;--w:0.86;--h:0.86"></div>
-<div class="bx slot sb"  style="--x:3.42;--y:5.52;--w:0.86;--h:0.86"></div>
-<div class="bx slot sb"  style="--x:0.42;--y:6.52;--w:0.86;--h:0.86"></div>
-<div class="bx slot sb"  style="--x:1.42;--y:6.52;--w:0.86;--h:0.86"></div>
-<div class="bx slot sb"  style="--x:2.42;--y:6.52;--w:0.86;--h:0.86"></div>
-<div class="bx slot sb"  style="--x:3.42;--y:6.52;--w:0.86;--h:0.86"></div>
-<div class="bx slot sb"  style="--x:0.42;--y:7.52;--w:0.86;--h:0.86"></div>
-<div class="bx slot sb"  style="--x:1.42;--y:7.52;--w:0.86;--h:0.86"></div>
-<div class="bx slot sb"  style="--x:2.42;--y:7.52;--w:0.86;--h:0.86"></div>
-<div class="bx slot sb"  style="--x:3.42;--y:7.52;--w:0.86;--h:0.86"></div>
-<div class="bx cell" data-i="0" data-j="0" data-cx="3.1" data-cy="-0.7" style="--x:6.95;--y:7.25;--w:1;--h:1"></div>
-<div class="bx cell" data-i="0" data-j="1" data-cx="3.9" data-cy="-1.3" style="--x:7.75;--y:6.65;--w:1;--h:1"></div>
-<div class="bx cell" data-i="0" data-j="2" data-cx="4.7" data-cy="-1.9" style="--x:8.55;--y:6.05;--w:1;--h:1"></div>
-<div class="bx cell" data-i="0" data-j="3" data-cx="5.5" data-cy="-2.5" style="--x:9.35;--y:5.45;--w:1;--h:1"></div>
-<div class="bx cell" data-i="0" data-j="4" data-cx="6.3" data-cy="-3.1" style="--x:10.15;--y:4.85;--w:1;--h:1"></div>
-<div class="bx cell" data-i="1" data-j="0" data-cx="2.5" data-cy="-1.5" style="--x:6.35;--y:6.45;--w:1;--h:1"></div>
-<div class="bx cell" data-i="1" data-j="1" data-cx="3.3" data-cy="-2.1" style="--x:7.15;--y:5.85;--w:1;--h:1"></div>
-<div class="bx cell" data-i="1" data-j="2" data-cx="4.1" data-cy="-2.7" style="--x:7.95;--y:5.25;--w:1;--h:1"></div>
-<div class="bx cell" data-i="1" data-j="3" data-cx="4.9" data-cy="-3.3" style="--x:8.75;--y:4.65;--w:1;--h:1"></div>
-<div class="bx cell" data-i="1" data-j="4" data-cx="5.7" data-cy="-3.9" style="--x:9.55;--y:4.05;--w:1;--h:1"></div>
-<div class="bx cell" data-i="2" data-j="0" data-cx="1.9" data-cy="-2.3" style="--x:5.75;--y:5.65;--w:1;--h:1"></div>
-<div class="bx cell" data-i="2" data-j="1" data-cx="2.7" data-cy="-2.9" style="--x:6.55;--y:5.05;--w:1;--h:1"></div>
-<div class="bx cell" data-i="2" data-j="2" data-cx="3.5" data-cy="-3.5" style="--x:7.35;--y:4.45;--w:1;--h:1"></div>
-<div class="bx cell" data-i="2" data-j="3" data-cx="4.3" data-cy="-4.1" style="--x:8.15;--y:3.85;--w:1;--h:1"></div>
-<div class="bx cell" data-i="2" data-j="4" data-cx="5.1" data-cy="-4.7" style="--x:8.95;--y:3.25;--w:1;--h:1"></div>
-<div class="bx cell" data-i="3" data-j="0" data-cx="1.3" data-cy="-3.1" style="--x:5.15;--y:4.85;--w:1;--h:1"></div>
-<div class="bx cell" data-i="3" data-j="1" data-cx="2.1" data-cy="-3.7" style="--x:5.95;--y:4.25;--w:1;--h:1"></div>
-<div class="bx cell" data-i="3" data-j="2" data-cx="2.9" data-cy="-4.3" style="--x:6.75;--y:3.65;--w:1;--h:1"></div>
-<div class="bx cell" data-i="3" data-j="3" data-cx="3.7" data-cy="-4.9" style="--x:7.55;--y:3.05;--w:1;--h:1"></div>
-<div class="bx cell" data-i="3" data-j="4" data-cx="4.5" data-cy="-5.5" style="--x:8.35;--y:2.45;--w:1;--h:1"></div>
-<div class="bx cell" data-i="4" data-j="0" data-cx="0.7" data-cy="-3.9" style="--x:4.55;--y:4.05;--w:1;--h:1"></div>
-<div class="bx cell" data-i="4" data-j="1" data-cx="1.5" data-cy="-4.5" style="--x:5.35;--y:3.45;--w:1;--h:1"></div>
-<div class="bx cell" data-i="4" data-j="2" data-cx="2.3" data-cy="-5.1" style="--x:6.15;--y:2.85;--w:1;--h:1"></div>
-<div class="bx cell" data-i="4" data-j="3" data-cx="3.1" data-cy="-5.7" style="--x:6.95;--y:2.25;--w:1;--h:1"></div>
-<div class="bx cell" data-i="4" data-j="4" data-cx="3.9" data-cy="-6.3" style="--x:7.75;--y:1.65;--w:1;--h:1"></div>
+<div class="bx slot sa" data-box="a" data-cx="0.5" data-cy="0.5" style="--x:4.42;--y:8.52;--w:0.86;--h:0.86"></div>
+<div class="bx slot sa" data-box="a" data-cx="1.5" data-cy="0.5" style="--x:5.42;--y:8.52;--w:0.86;--h:0.86"></div>
+<div class="bx slot sa" data-box="a" data-cx="2.5" data-cy="0.5" style="--x:6.42;--y:8.52;--w:0.86;--h:0.86"></div>
+<div class="bx slot sa" data-box="a" data-cx="0.5" data-cy="1.5" style="--x:4.42;--y:9.52;--w:0.86;--h:0.86"></div>
+<div class="bx slot sa" data-box="a" data-cx="1.5" data-cy="1.5" style="--x:5.42;--y:9.52;--w:0.86;--h:0.86"></div>
+<div class="bx slot sa" data-box="a" data-cx="2.5" data-cy="1.5" style="--x:6.42;--y:9.52;--w:0.86;--h:0.86"></div>
+<div class="bx slot sa" data-box="a" data-cx="0.5" data-cy="2.5" style="--x:4.42;--y:10.52;--w:0.86;--h:0.86"></div>
+<div class="bx slot sa" data-box="a" data-cx="1.5" data-cy="2.5" style="--x:5.42;--y:10.52;--w:0.86;--h:0.86"></div>
+<div class="bx slot sa" data-box="a" data-cx="2.5" data-cy="2.5" style="--x:6.42;--y:10.52;--w:0.86;--h:0.86"></div>
+<div class="bx slot sb" data-box="b" data-cx="-3.5" data-cy="-3.5" style="--x:0.42;--y:4.52;--w:0.86;--h:0.86"></div>
+<div class="bx slot sb" data-box="b" data-cx="-2.5" data-cy="-3.5" style="--x:1.42;--y:4.52;--w:0.86;--h:0.86"></div>
+<div class="bx slot sb" data-box="b" data-cx="-1.5" data-cy="-3.5" style="--x:2.42;--y:4.52;--w:0.86;--h:0.86"></div>
+<div class="bx slot sb" data-box="b" data-cx="-0.5" data-cy="-3.5" style="--x:3.42;--y:4.52;--w:0.86;--h:0.86"></div>
+<div class="bx slot sb" data-box="b" data-cx="-3.5" data-cy="-2.5" style="--x:0.42;--y:5.52;--w:0.86;--h:0.86"></div>
+<div class="bx slot sb" data-box="b" data-cx="-2.5" data-cy="-2.5" style="--x:1.42;--y:5.52;--w:0.86;--h:0.86"></div>
+<div class="bx slot sb" data-box="b" data-cx="-1.5" data-cy="-2.5" style="--x:2.42;--y:5.52;--w:0.86;--h:0.86"></div>
+<div class="bx slot sb" data-box="b" data-cx="-0.5" data-cy="-2.5" style="--x:3.42;--y:5.52;--w:0.86;--h:0.86"></div>
+<div class="bx slot sb" data-box="b" data-cx="-3.5" data-cy="-1.5" style="--x:0.42;--y:6.52;--w:0.86;--h:0.86"></div>
+<div class="bx slot sb" data-box="b" data-cx="-2.5" data-cy="-1.5" style="--x:1.42;--y:6.52;--w:0.86;--h:0.86"></div>
+<div class="bx slot sb" data-box="b" data-cx="-1.5" data-cy="-1.5" style="--x:2.42;--y:6.52;--w:0.86;--h:0.86"></div>
+<div class="bx slot sb" data-box="b" data-cx="-0.5" data-cy="-1.5" style="--x:3.42;--y:6.52;--w:0.86;--h:0.86"></div>
+<div class="bx slot sb" data-box="b" data-cx="-3.5" data-cy="-0.5" style="--x:0.42;--y:7.52;--w:0.86;--h:0.86"></div>
+<div class="bx slot sb" data-box="b" data-cx="-2.5" data-cy="-0.5" style="--x:1.42;--y:7.52;--w:0.86;--h:0.86"></div>
+<div class="bx slot sb" data-box="b" data-cx="-1.5" data-cy="-0.5" style="--x:2.42;--y:7.52;--w:0.86;--h:0.86"></div>
+<div class="bx slot sb" data-box="b" data-cx="-0.5" data-cy="-0.5" style="--x:3.42;--y:7.52;--w:0.86;--h:0.86"></div>
+<div class="bx cell" data-box="h" data-i="0" data-j="0" data-cx="3.1" data-cy="-0.7" style="--x:6.95;--y:7.25;--w:1;--h:1"></div>
+<div class="bx cell" data-box="h" data-i="0" data-j="1" data-cx="3.9" data-cy="-1.3" style="--x:7.75;--y:6.65;--w:1;--h:1"></div>
+<div class="bx cell" data-box="h" data-i="0" data-j="2" data-cx="4.7" data-cy="-1.9" style="--x:8.55;--y:6.05;--w:1;--h:1"></div>
+<div class="bx cell" data-box="h" data-i="0" data-j="3" data-cx="5.5" data-cy="-2.5" style="--x:9.35;--y:5.45;--w:1;--h:1"></div>
+<div class="bx cell" data-box="h" data-i="0" data-j="4" data-cx="6.3" data-cy="-3.1" style="--x:10.15;--y:4.85;--w:1;--h:1"></div>
+<div class="bx cell" data-box="h" data-i="1" data-j="0" data-cx="2.5" data-cy="-1.5" style="--x:6.35;--y:6.45;--w:1;--h:1"></div>
+<div class="bx cell" data-box="h" data-i="1" data-j="1" data-cx="3.3" data-cy="-2.1" style="--x:7.15;--y:5.85;--w:1;--h:1"></div>
+<div class="bx cell" data-box="h" data-i="1" data-j="2" data-cx="4.1" data-cy="-2.7" style="--x:7.95;--y:5.25;--w:1;--h:1"></div>
+<div class="bx cell" data-box="h" data-i="1" data-j="3" data-cx="4.9" data-cy="-3.3" style="--x:8.75;--y:4.65;--w:1;--h:1"></div>
+<div class="bx cell" data-box="h" data-i="1" data-j="4" data-cx="5.7" data-cy="-3.9" style="--x:9.55;--y:4.05;--w:1;--h:1"></div>
+<div class="bx cell" data-box="h" data-i="2" data-j="0" data-cx="1.9" data-cy="-2.3" style="--x:5.75;--y:5.65;--w:1;--h:1"></div>
+<div class="bx cell" data-box="h" data-i="2" data-j="1" data-cx="2.7" data-cy="-2.9" style="--x:6.55;--y:5.05;--w:1;--h:1"></div>
+<div class="bx cell" data-box="h" data-i="2" data-j="2" data-cx="3.5" data-cy="-3.5" style="--x:7.35;--y:4.45;--w:1;--h:1"></div>
+<div class="bx cell" data-box="h" data-i="2" data-j="3" data-cx="4.3" data-cy="-4.1" style="--x:8.15;--y:3.85;--w:1;--h:1"></div>
+<div class="bx cell" data-box="h" data-i="2" data-j="4" data-cx="5.1" data-cy="-4.7" style="--x:8.95;--y:3.25;--w:1;--h:1"></div>
+<div class="bx cell" data-box="h" data-i="3" data-j="0" data-cx="1.3" data-cy="-3.1" style="--x:5.15;--y:4.85;--w:1;--h:1"></div>
+<div class="bx cell" data-box="h" data-i="3" data-j="1" data-cx="2.1" data-cy="-3.7" style="--x:5.95;--y:4.25;--w:1;--h:1"></div>
+<div class="bx cell" data-box="h" data-i="3" data-j="2" data-cx="2.9" data-cy="-4.3" style="--x:6.75;--y:3.65;--w:1;--h:1"></div>
+<div class="bx cell" data-box="h" data-i="3" data-j="3" data-cx="3.7" data-cy="-4.9" style="--x:7.55;--y:3.05;--w:1;--h:1"></div>
+<div class="bx cell" data-box="h" data-i="3" data-j="4" data-cx="4.5" data-cy="-5.5" style="--x:8.35;--y:2.45;--w:1;--h:1"></div>
+<div class="bx cell" data-box="h" data-i="4" data-j="0" data-cx="0.7" data-cy="-3.9" style="--x:4.55;--y:4.05;--w:1;--h:1"></div>
+<div class="bx cell" data-box="h" data-i="4" data-j="1" data-cx="1.5" data-cy="-4.5" style="--x:5.35;--y:3.45;--w:1;--h:1"></div>
+<div class="bx cell" data-box="h" data-i="4" data-j="2" data-cx="2.3" data-cy="-5.1" style="--x:6.15;--y:2.85;--w:1;--h:1"></div>
+<div class="bx cell" data-box="h" data-i="4" data-j="3" data-cx="3.1" data-cy="-5.7" style="--x:6.95;--y:2.25;--w:1;--h:1"></div>
+<div class="bx cell" data-box="h" data-i="4" data-j="4" data-cx="3.9" data-cy="-6.3" style="--x:7.75;--y:1.65;--w:1;--h:1"></div>
 <div class="lbl"  style="--cx:5.85;--cy:12;--fs:.56;color:#D97706">3² = 9</div>
 <div class="lbl"  style="--cx:2.35;--cy:3.95;--fs:.56;color:#0284C7">4² = 16</div>
 <div class="lbl"  style="--cx:7.85;--cy:0.52;--fs:.62;color:#4F46E5">5² = 25</div>
       </div>
       <div id="layer">
-<div class="piece idle a" data-kind="a" data-hx="0.5" data-hy="0.5" style="--x:4.85;--y:8.95;--r:0deg;--s:1"><div class="inner" style="animation-delay:-0.00s"><i class="eye l"></i><i class="eye r"></i><i class="cheek l"></i><i class="cheek r"></i><i class="mouth"></i><i class="sweat"></i></div></div>
-<div class="piece idle a" data-kind="a" data-hx="1.5" data-hy="0.5" style="--x:5.85;--y:8.95;--r:0deg;--s:1"><div class="inner" style="animation-delay:-0.70s"><i class="eye l"></i><i class="eye r"></i><i class="cheek l"></i><i class="cheek r"></i><i class="mouth"></i><i class="sweat"></i></div></div>
-<div class="piece idle a" data-kind="a" data-hx="2.5" data-hy="0.5" style="--x:6.85;--y:8.95;--r:0deg;--s:1"><div class="inner" style="animation-delay:-1.40s"><i class="eye l"></i><i class="eye r"></i><i class="cheek l"></i><i class="cheek r"></i><i class="mouth"></i><i class="sweat"></i></div></div>
-<div class="piece idle a" data-kind="a" data-hx="0.5" data-hy="1.5" style="--x:4.85;--y:9.95;--r:0deg;--s:1"><div class="inner" style="animation-delay:-1.70s"><i class="eye l"></i><i class="eye r"></i><i class="cheek l"></i><i class="cheek r"></i><i class="mouth"></i><i class="sweat"></i></div></div>
-<div class="piece idle a" data-kind="a" data-hx="1.5" data-hy="1.5" style="--x:5.85;--y:9.95;--r:0deg;--s:1"><div class="inner" style="animation-delay:-0.00s"><i class="eye l"></i><i class="eye r"></i><i class="cheek l"></i><i class="cheek r"></i><i class="mouth"></i><i class="sweat"></i></div></div>
-<div class="piece idle a" data-kind="a" data-hx="2.5" data-hy="1.5" style="--x:6.85;--y:9.95;--r:0deg;--s:1"><div class="inner" style="animation-delay:-0.70s"><i class="eye l"></i><i class="eye r"></i><i class="cheek l"></i><i class="cheek r"></i><i class="mouth"></i><i class="sweat"></i></div></div>
-<div class="piece idle a" data-kind="a" data-hx="0.5" data-hy="2.5" style="--x:4.85;--y:10.95;--r:0deg;--s:1"><div class="inner" style="animation-delay:-1.00s"><i class="eye l"></i><i class="eye r"></i><i class="cheek l"></i><i class="cheek r"></i><i class="mouth"></i><i class="sweat"></i></div></div>
-<div class="piece idle a" data-kind="a" data-hx="1.5" data-hy="2.5" style="--x:5.85;--y:10.95;--r:0deg;--s:1"><div class="inner" style="animation-delay:-1.70s"><i class="eye l"></i><i class="eye r"></i><i class="cheek l"></i><i class="cheek r"></i><i class="mouth"></i><i class="sweat"></i></div></div>
-<div class="piece idle a" data-kind="a" data-hx="2.5" data-hy="2.5" style="--x:6.85;--y:10.95;--r:0deg;--s:1"><div class="inner" style="animation-delay:-0.00s"><i class="eye l"></i><i class="eye r"></i><i class="cheek l"></i><i class="cheek r"></i><i class="mouth"></i><i class="sweat"></i></div></div>
-<div class="piece idle b" data-kind="b" data-hx="-3.5" data-hy="-3.5" style="--x:0.85;--y:4.95;--r:0deg;--s:1"><div class="inner" style="animation-delay:-2.40s"><i class="eye l"></i><i class="eye r"></i><i class="cheek l"></i><i class="cheek r"></i><i class="mouth"></i><i class="sweat"></i></div></div>
-<div class="piece idle b" data-kind="b" data-hx="-2.5" data-hy="-3.5" style="--x:1.85;--y:4.95;--r:0deg;--s:1"><div class="inner" style="animation-delay:-0.70s"><i class="eye l"></i><i class="eye r"></i><i class="cheek l"></i><i class="cheek r"></i><i class="mouth"></i><i class="sweat"></i></div></div>
-<div class="piece idle b" data-kind="b" data-hx="-1.5" data-hy="-3.5" style="--x:2.85;--y:4.95;--r:0deg;--s:1"><div class="inner" style="animation-delay:-1.40s"><i class="eye l"></i><i class="eye r"></i><i class="cheek l"></i><i class="cheek r"></i><i class="mouth"></i><i class="sweat"></i></div></div>
-<div class="piece idle b" data-kind="b" data-hx="-0.5" data-hy="-3.5" style="--x:3.85;--y:4.95;--r:0deg;--s:1"><div class="inner" style="animation-delay:-2.10s"><i class="eye l"></i><i class="eye r"></i><i class="cheek l"></i><i class="cheek r"></i><i class="mouth"></i><i class="sweat"></i></div></div>
-<div class="piece idle b" data-kind="b" data-hx="-3.5" data-hy="-2.5" style="--x:0.85;--y:5.95;--r:0deg;--s:1"><div class="inner" style="animation-delay:-1.70s"><i class="eye l"></i><i class="eye r"></i><i class="cheek l"></i><i class="cheek r"></i><i class="mouth"></i><i class="sweat"></i></div></div>
-<div class="piece idle b" data-kind="b" data-hx="-2.5" data-hy="-2.5" style="--x:1.85;--y:5.95;--r:0deg;--s:1"><div class="inner" style="animation-delay:-2.40s"><i class="eye l"></i><i class="eye r"></i><i class="cheek l"></i><i class="cheek r"></i><i class="mouth"></i><i class="sweat"></i></div></div>
-<div class="piece idle b" data-kind="b" data-hx="-1.5" data-hy="-2.5" style="--x:2.85;--y:5.95;--r:0deg;--s:1"><div class="inner" style="animation-delay:-0.70s"><i class="eye l"></i><i class="eye r"></i><i class="cheek l"></i><i class="cheek r"></i><i class="mouth"></i><i class="sweat"></i></div></div>
-<div class="piece idle b" data-kind="b" data-hx="-0.5" data-hy="-2.5" style="--x:3.85;--y:5.95;--r:0deg;--s:1"><div class="inner" style="animation-delay:-1.40s"><i class="eye l"></i><i class="eye r"></i><i class="cheek l"></i><i class="cheek r"></i><i class="mouth"></i><i class="sweat"></i></div></div>
-<div class="piece idle b" data-kind="b" data-hx="-3.5" data-hy="-1.5" style="--x:0.85;--y:6.95;--r:0deg;--s:1"><div class="inner" style="animation-delay:-1.00s"><i class="eye l"></i><i class="eye r"></i><i class="cheek l"></i><i class="cheek r"></i><i class="mouth"></i><i class="sweat"></i></div></div>
-<div class="piece idle b" data-kind="b" data-hx="-2.5" data-hy="-1.5" style="--x:1.85;--y:6.95;--r:0deg;--s:1"><div class="inner" style="animation-delay:-1.70s"><i class="eye l"></i><i class="eye r"></i><i class="cheek l"></i><i class="cheek r"></i><i class="mouth"></i><i class="sweat"></i></div></div>
-<div class="piece idle b" data-kind="b" data-hx="-1.5" data-hy="-1.5" style="--x:2.85;--y:6.95;--r:0deg;--s:1"><div class="inner" style="animation-delay:-2.40s"><i class="eye l"></i><i class="eye r"></i><i class="cheek l"></i><i class="cheek r"></i><i class="mouth"></i><i class="sweat"></i></div></div>
-<div class="piece idle b" data-kind="b" data-hx="-0.5" data-hy="-1.5" style="--x:3.85;--y:6.95;--r:0deg;--s:1"><div class="inner" style="animation-delay:-0.70s"><i class="eye l"></i><i class="eye r"></i><i class="cheek l"></i><i class="cheek r"></i><i class="mouth"></i><i class="sweat"></i></div></div>
-<div class="piece idle b" data-kind="b" data-hx="-3.5" data-hy="-0.5" style="--x:0.85;--y:7.95;--r:0deg;--s:1"><div class="inner" style="animation-delay:-0.30s"><i class="eye l"></i><i class="eye r"></i><i class="cheek l"></i><i class="cheek r"></i><i class="mouth"></i><i class="sweat"></i></div></div>
-<div class="piece idle b" data-kind="b" data-hx="-2.5" data-hy="-0.5" style="--x:1.85;--y:7.95;--r:0deg;--s:1"><div class="inner" style="animation-delay:-1.00s"><i class="eye l"></i><i class="eye r"></i><i class="cheek l"></i><i class="cheek r"></i><i class="mouth"></i><i class="sweat"></i></div></div>
-<div class="piece idle b" data-kind="b" data-hx="-1.5" data-hy="-0.5" style="--x:2.85;--y:7.95;--r:0deg;--s:1"><div class="inner" style="animation-delay:-1.70s"><i class="eye l"></i><i class="eye r"></i><i class="cheek l"></i><i class="cheek r"></i><i class="mouth"></i><i class="sweat"></i></div></div>
-<div class="piece idle b" data-kind="b" data-hx="-0.5" data-hy="-0.5" style="--x:3.85;--y:7.95;--r:0deg;--s:1"><div class="inner" style="animation-delay:-0.00s"><i class="eye l"></i><i class="eye r"></i><i class="cheek l"></i><i class="cheek r"></i><i class="mouth"></i><i class="sweat"></i></div></div>
+<div class="piece a c-nour rx-soft hr-hijab gl girl" data-kind="a" data-hx="0.5" data-hy="0.5" data-name="Ms. Nour" style="--x:4.85;--y:8.95;--r:0deg;--s:1;--hc:#0f766e"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece a c-hamza rx-smile" data-kind="a" data-hx="1.5" data-hy="0.5" data-name="Mr. Hamza" style="--x:5.85;--y:8.95;--r:0deg;--s:1"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece a c-mona rx-soft hr-hijab gl i-poised girl" data-kind="a" data-hx="2.5" data-hy="0.5" data-name="Ms. Mona" style="--x:6.85;--y:8.95;--r:0deg;--s:1;--hc:#64748b"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece a c-ayman rx-smug hr-semi a2-mustache bd" data-kind="a" data-hx="0.5" data-hy="1.5" data-name="Mr. Ayman" style="--x:4.85;--y:9.95;--r:0deg;--s:1;--hc:#1f1a17;--bg:#b45f06;--bd:#7c3f06"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece a c-maha rx-soft hr-hijab lips girl" data-kind="a" data-hx="1.5" data-hy="1.5" data-name="Ms. Maha" style="--x:5.85;--y:9.95;--r:0deg;--s:1;--hc:#9f1239"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece a c-tamim rx-bounce hr-short i-small i-full" data-kind="a" data-hx="2.5" data-hy="1.5" data-name="Tamim" style="--x:6.85;--y:9.95;--r:0deg;--s:1;--hc:#111827;--bg:#c4680a;--bd:#8a4a0c"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece a c-ahed rx-chill hr-short i-small" data-kind="a" data-hx="0.5" data-hy="2.5" data-name="Ahed" style="--x:4.85;--y:10.95;--r:0deg;--s:1;--hc:#a16207;--bg:#fcd34d;--bd:#f0b429"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece a c-azad rx-spidey spider" data-kind="a" data-hx="1.5" data-hy="2.5" data-name="Azad" style="--x:5.85;--y:10.95;--r:0deg;--s:1"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece a c-diaa rx-scream hr-short" data-kind="a" data-hx="2.5" data-hy="2.5" data-name="Diaa&#39;" style="--x:6.85;--y:10.95;--r:0deg;--s:1;--hc:#7c2d12"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece b c-ismail rx-calm hr-short i-flat" data-kind="b" data-hx="-3.5" data-hy="-3.5" data-name="Ismail" style="--x:0.85;--y:4.95;--r:0deg;--s:1;--hc:#1f2937"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece b c-jaad rx-scared hr-spiky" data-kind="b" data-hx="-2.5" data-hy="-3.5" data-name="Jaad" style="--x:1.85;--y:4.95;--r:0deg;--s:1;--hc:#111827"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece b c-jana rx-glad hr-pony girl" data-kind="b" data-hx="-1.5" data-hy="-3.5" data-name="Jana" style="--x:2.85;--y:4.95;--r:0deg;--s:1;--hc:#7c4a2d"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece b c-judy rx-happy hr-hijab girl" data-kind="b" data-hx="-0.5" data-hy="-3.5" data-name="Joudy" style="--x:3.85;--y:4.95;--r:0deg;--s:1;--hc:#f3e3c3"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece b c-mahmoud rx-softstar hr-short i-soft" data-kind="b" data-hx="-3.5" data-hy="-2.5" data-name="Mahmoud" style="--x:0.85;--y:5.95;--r:0deg;--s:1;--hc:#92400e"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece b c-matwa rx-bstar hr-short gl" data-kind="b" data-hx="-2.5" data-hy="-2.5" data-name="M-Atwa" style="--x:1.85;--y:5.95;--r:0deg;--s:1;--hc:#111827"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece b c-mlolo rx-ask hr-short i-curious" data-kind="b" data-hx="-1.5" data-hy="-2.5" data-name="M-Lolo" style="--x:2.85;--y:5.95;--r:0deg;--s:1;--hc:#451a03"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece b c-omar rx-yawn hr-short i-bored" data-kind="b" data-hx="-0.5" data-hy="-2.5" data-name="Omar" style="--x:3.85;--y:5.95;--r:0deg;--s:1;--hc:#374151"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece b c-raya rx-proud hr-pony girl" data-kind="b" data-hx="-3.5" data-hy="-1.5" data-name="Raya" style="--x:0.85;--y:6.95;--r:0deg;--s:1;--hc:#451a03"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece b c-rayan rx-shrug hr-short i-meh" data-kind="b" data-hx="-2.5" data-hy="-1.5" data-name="Rayan" style="--x:1.85;--y:6.95;--r:0deg;--s:1;--hc:#292524"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece b c-salma rx-glad hr-hijab girl" data-kind="b" data-hx="-1.5" data-hy="-1.5" data-name="Salma" style="--x:2.85;--y:6.95;--r:0deg;--s:1;--hc:#f9a8d4;--bg:#bfeafd;--bd:#82cef4"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece b c-sama rx-glad hr-pig girl" data-kind="b" data-hx="-0.5" data-hy="-1.5" data-name="Sama" style="--x:3.85;--y:6.95;--r:0deg;--s:1;--hc:#111827"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece b c-tala rx-proud hr-pony i-small girl" data-kind="b" data-hx="-3.5" data-hy="-0.5" data-name="Tala" style="--x:0.85;--y:7.95;--r:0deg;--s:1;--hc:#2a1810"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece b c-yaman rx-bounce hr-short i-small" data-kind="b" data-hx="-2.5" data-hy="-0.5" data-name="Yaman" style="--x:1.85;--y:7.95;--r:0deg;--s:1;--hc:#451a03"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece b c-yousef rx-bounce hr-cloud" data-kind="b" data-hx="-1.5" data-hy="-0.5" data-name="Yousef" style="--x:2.85;--y:7.95;--r:0deg;--s:1;--hc:#facc15"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece b c-zainab rx-proud hr-hijab girl" data-kind="b" data-hx="-0.5" data-hy="-0.5" data-name="Zainab" style="--x:3.85;--y:7.95;--r:0deg;--s:1;--hc:#f8fafc"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
       </div>
       <div id="frame">
 <div class="bx hypline"  style="--x:5.35;--y:2.45;--w:5;--h:5;transform:rotate(-36.87deg)"></div>
@@ -275,6 +482,7 @@
 <div class="badge"  style="--cx:4.8;--cy:6.45;background:#0284C7">4</div>
 <div class="badge"  style="--cx:5.47;--cy:6.73;background:#4F46E5">5</div>
       </div>
+      <div id="tag"></div>
     </div>
   </div>
 </div>
@@ -318,21 +526,29 @@ const stage=document.getElementById('stage'),back=document.getElementById('back'
 const OX=4.35,OY=8.45,UW=11.7;
 const HROT=-36.87, PLACED=1.075, LIFT=1.12;
 const $=id=>document.getElementById(id);
+const tag=$('tag');
 const SPK_ON='<svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/></svg>';
 const SPK_OFF='<svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4z"/><path d="M22 9l-6 6"/><path d="M16 9l6 6"/></svg>';
 
 const pieces=[...layer.querySelectorAll('.piece')].map(el=>{
   const hx=+el.dataset.hx,hy=+el.dataset.hy;
-  return{el,inner:el.querySelector('.inner'),kind:el.dataset.kind,home:{x:hx,y:hy},
+  return{el,inner:el.querySelector('.inner'),kind:el.dataset.kind,name:el.dataset.name||'',home:{x:hx,y:hy},
     x:hx,y:hy,rot:0,s:1,tx:hx,ty:hy,trot:0,ts:1,cell:null,dragging:false,last:''};
 });
-const cells=[...back.querySelectorAll('.cell')].map(el=>({el,i:+el.dataset.i,j:+el.dataset.j,c:{x:+el.dataset.cx,y:+el.dataset.cy},piece:null}));
+const cells=[...back.querySelectorAll('.cell')].map(el=>({el,box:'h',i:+el.dataset.i,j:+el.dataset.j,c:{x:+el.dataset.cx,y:+el.dataset.cy},piece:null}));
+const legSlots=[...back.querySelectorAll('.slot')].map(el=>({el,box:el.dataset.box,c:{x:+el.dataset.cx,y:+el.dataset.cy},piece:null}));
+const slots=cells.concat(legSlots);                      // 25 + 9 + 16 places a square can sit in
+pieces.forEach(p=>{
+  p.slot=legSlots.find(s=>Math.abs(s.c.x-p.home.x)<.01&&Math.abs(s.c.y-p.home.y)<.01);
+  p.slot.piece=p;p.homeSlot=p.slot;p.out=false;p.who=(p.el.className.match(/c-([a-z]+)/)||[0,''])[1];
+});
+const MINX=-4.35+.5,MAXX=7.35-.5,MINY=-8.45+.5,MAXY=4.25-.5;   // squares can never leave the main card
 
 /* ---------- every square rests with a smile; now and then one suddenly screams with joy, then calms down ---------- */
 (function joyLoop(){
   setTimeout(()=>{
-    if(!document.hidden&&!busy){
-      const pool=pieces.filter(p=>!p.dragging&&!p.el.classList.contains('joy'));
+    if(!document.hidden&&!busy&&!plain&&!lite){
+      const pool=pieces.filter(p=>!p.dragging&&!p.out&&!p.el.classList.contains('joy')&&!p.el.classList.contains('spider'));
       const p=pool[Math.floor(Math.random()*pool.length)];
       if(p){p.el.classList.add('joy');setTimeout(()=>p.el.classList.remove('joy'),900+Math.random()*800)}
     }
@@ -340,41 +556,75 @@ const cells=[...back.querySelectorAll('.cell')].map(el=>({el,i:+el.dataset.i,j:+
   },1100+Math.random()*2400);
 })();
 
-/* ---------- easing loop (only touches the DOM when something moves) ---------- */
+/* ---------- easing loop: one cheap transform per moving square; the loop sleeps when nothing moves ---------- */
+let U=1,raf=0,lastT=0,slow=0,seen=0,R={left:0,top:0},web=null;
 function render(p){
   const k=p.x.toFixed(3)+'|'+p.y.toFixed(3)+'|'+p.rot.toFixed(2)+'|'+p.s.toFixed(3);
   if(k===p.last)return;p.last=k;
-  const st=p.el.style;
-  st.setProperty('--x',(p.x+OX).toFixed(4));st.setProperty('--y',(p.y+OY).toFixed(4));
-  st.setProperty('--r',p.rot.toFixed(2)+'deg');st.setProperty('--s',p.s.toFixed(4));
+  p.el.style.transform='translate('+((p.x+OX)*U).toFixed(2)+'px,'+((p.y+OY)*U).toFixed(2)+'px) rotate('+p.rot.toFixed(2)+'deg) scale('+p.s.toFixed(4)+')';
 }
-function tick(){
+function measure(){R=stage.getBoundingClientRect();U=R.width/UW;for(const p of pieces){p.last='';render(p)}}
+function wake(){if(!raf){lastT=0;raf=requestAnimationFrame(tick)}}
+function tick(ts){
+  raf=0;let moving=false;
+  // watchdog: if frames keep taking more than ~35 ms, quietly drop the sparkles and wobble
+  if(lastT&&!lite){const dt=ts-lastT;seen++;if(dt>35)slow++;if(seen>=24){if(slow>=9){lite=true;stage.classList.add('lite')}seen=0;slow=0}}
+  lastT=ts;
   for(const p of pieces){
     const dx=p.tx-p.x,dy=p.ty-p.y,dr=p.trot-p.rot,ds=p.ts-p.s;
     if(Math.abs(dx)+Math.abs(dy)+Math.abs(dr)+Math.abs(ds)>.002){
       const k=p.dragging?.4:.3;
-      p.x+=dx*k;p.y+=dy*k;p.rot+=dr*k;p.s+=ds*k;
-    }else{p.x=p.tx;p.y=p.ty;p.rot=p.trot;p.s=p.ts}
+      p.x+=dx*k;p.y+=dy*k;p.rot+=dr*k;p.s+=ds*k;moving=true;
+      if(!p.mv){p.mv=1;p.el.classList.add('mv')}
+    }else{
+      p.x=p.tx;p.y=p.ty;p.rot=p.trot;p.s=p.ts;
+      if(p.mv){p.mv=0;p.el.classList.remove('mv')}
+    }
     render(p);
   }
-  requestAnimationFrame(tick);
+  if(web){
+    const wp=web.p,ws=web.s,dx=wp.x-ws.c.x,dy=wp.y-ws.c.y,L=Math.hypot(dx,dy);
+    web.el.style.width=(L*U).toFixed(1)+'px';
+    web.el.style.transform='rotate('+Math.atan2(dy,dx).toFixed(4)+'rad)';
+    if(web.go&&L<.07){const w=web;web=null;w.el.classList.add('fade');setTimeout(()=>w.el.remove(),300)}
+  }
+  if(cur)placeTag();
+  if(moving||cur||web){raf=requestAnimationFrame(tick)}else{lastT=0}
 }
-requestAnimationFrame(tick);
+if(window.ResizeObserver)new ResizeObserver(measure).observe(stage);else window.addEventListener('resize',measure);
+measure();
 
-/* ---------- sound ---------- */
-let ac=null,muted=false;
+/* ---------- the name tag (only while a square is held) ---------- */
+function placeTag(){
+  const x=Math.min(UW-1.4,Math.max(1.4,cur.x+OX)),y=Math.max(1.3,cur.y+OY-.85);
+  tag.style.setProperty('--cx',x.toFixed(3));tag.style.setProperty('--cy',y.toFixed(3));
+}
+
+/* ---------- sound (the audio engine is created at start-up and unlocked on the very first tap) ---------- */
+let ac=null,muted=false,warmed=false;
 function audio(){
-  if(!ac){try{ac=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}
-  if(ac&&ac.state==='suspended')ac.resume();
+  if(!ac){
+    const AC=window.AudioContext||window.webkitAudioContext;
+    if(!AC)return null;
+    try{ac=new AC({latencyHint:'interactive'})}catch(e){try{ac=new AC()}catch(_){return null}}
+  }
+  if(ac.state!=='running')ac.resume().catch(()=>{});
   return ac;
 }
+function unlock(){
+  const a=audio();if(!a||warmed)return;
+  warmed=true;
+  try{const s=a.createBufferSource();s.buffer=a.createBuffer(1,1,22050);s.connect(a.destination);s.start(0)}catch(_){}
+}
+['pointerdown','touchend','click','keydown'].forEach(ev=>window.addEventListener(ev,unlock,{capture:true,passive:true}));
+audio();
 function pop(f0,f1,dur=.14,vol=.35){
   if(muted)return;
   const a=audio();if(!a)return;
   const t=a.currentTime,o=a.createOscillator(),g=a.createGain();
   o.type='sine';o.frequency.setValueAtTime(f0,t);o.frequency.exponentialRampToValueAtTime(f1,t+dur);
   g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol,t+.008);g.gain.exponentialRampToValueAtTime(.001,t+dur);
-  o.connect(g).connect(a.destination);o.start(t);o.stop(t+dur+.02);
+  o.connect(g);g.connect(a.destination);o.start(t);o.stop(t+dur+.02);
 }
 const popOut=()=>pop(900,260,.15);                         // a square comes out
 const popPut=(n=0)=>pop(380+n*14,900+n*22,.13);            // a square goes in
@@ -382,81 +632,128 @@ function chime(){[523,659,784,1047,1319].forEach((f,i)=>setTimeout(()=>pop(f,f*1
 
 /* ---------- wobble + sparkles ---------- */
 function wobble(p){
-  if(!p.inner.animate)return;
-  p.inner.animate([
+  if(lite||!p.inner.animate)return;
+  p.inner.style.willChange='transform';
+  const an=p.inner.animate([
     {transform:'scale(1,1) rotate(0deg)'},
     {transform:'scale(1.3,.7) rotate(-6deg)',offset:.2},
     {transform:'scale(.82,1.2) rotate(6deg)',offset:.4},
     {transform:'scale(1.12,.92) rotate(-4deg)',offset:.62},
     {transform:'scale(.96,1.05) rotate(2deg)',offset:.82},
     {transform:'scale(1,1) rotate(0deg)'}
-  ],{duration:560,easing:'ease-out'});
+  ],{duration:520,easing:'ease-out'});
+  an.onfinish=an.oncancel=()=>{p.inner.style.willChange=''};
 }
 function burst(x,y,col){
-  if(!stage.animate)return;
-  const u=stage.getBoundingClientRect().width/UW;
+  if(lite)return;
   const g=document.createElement('div');g.className='burst';
-  g.style.setProperty('--cx',x+OX);g.style.setProperty('--cy',y+OY);
-  const ring=document.createElement('i');ring.className='ring';ring.style.borderColor=col;g.appendChild(ring);
-  ring.animate([{transform:'translate(-50%,-50%) scale(.5)',opacity:.95},{transform:'translate(-50%,-50%) scale(1.9)',opacity:0}],{duration:500,easing:'ease-out',fill:'forwards'});
-  const cols=['#f59e0b','#0ea5e9','#6366f1','#ffffff',col];
-  for(let i=0;i<7;i++){
-    const a=i/7*Math.PI*2+Math.random()*.5,d=(.85+Math.random()*.4)*u;
-    const s=document.createElement('i');s.className='dot';s.style.background=cols[i%5];g.appendChild(s);
-    s.animate([{transform:'translate(0px,0px)',opacity:1},{transform:'translate('+(Math.cos(a)*d).toFixed(1)+'px,'+(Math.sin(a)*d).toFixed(1)+'px)',opacity:0}],
-      {duration:520,easing:'cubic-bezier(.2,.8,.3,1)',fill:'forwards'});
-  }
-  layer.appendChild(g);setTimeout(()=>g.remove(),620);
+  g.style.setProperty('--cx',x+OX);g.style.setProperty('--cy',y+OY);g.style.setProperty('--bc',col);
+  layer.appendChild(g);setTimeout(()=>g.remove(),600);
 }
 
-/* ---------- cells ---------- */
-function setCell(c,state){c.el.classList.toggle('hot',state==='hot');c.el.classList.toggle('full',state==='full')}
-function place(p,c,n){                       // shared by drag & drop and by Auto fill
-  c.piece=p;p.cell=c;setCell(c,'full');
-  p.el.classList.remove('idle');
-  p.tx=c.c.x;p.ty=c.c.y;p.trot=HROT;p.ts=PLACED;
+/* ---------- places, boxes and free placement ---------- */
+const EV=[-.6,-.8],NV=[.8,-.6];
+function boxAt(x,y){                          // which of the three boxes (if any) is this point inside?
+  if(x>=0&&x<=3&&y>=0&&y<=3)return 'a';
+  if(x>=-4&&x<=0&&y>=-4&&y<=0)return 'b';
+  const dx=x-3,i=dx*EV[0]+y*EV[1],j=dx*NV[0]+y*NV[1];
+  return(i>=0&&i<=5&&j>=0&&j<=5)?'h':null;
+}
+function setOut(p,on){if(p.out===on)return;p.out=on;p.el.classList.toggle('out',on)}
+function release(p){
+  const s=p.slot;if(!s)return;
+  s.piece=null;p.slot=null;
+  if(s.box==='h')s.el.classList.remove('full');
+}
+function occupy(p,s){
+  release(p);s.piece=p;p.slot=s;setOut(p,false);
+  const h=s.box==='h';
+  p.tx=s.c.x;p.ty=s.c.y;p.trot=h?HROT:0;p.ts=h?PLACED:1;
+}
+function place(p,c,n){                        // into the big square: sparkles, sound, counters
+  popPut(n||0);                               // sound first, before any drawing work
+  occupy(p,c);c.el.classList.add('full');
   stage.classList.add('started');
-  popPut(n||0);wobble(p);burst(c.c.x,c.c.y,p.kind==='a'?'#f59e0b':'#0ea5e9');
-  updateCount();
+  wobble(p);burst(c.c.x,c.c.y,p.kind==='a'?'#f59e0b':'#0ea5e9');
+  updateCount();wake();
+}
+function settle(p,s){popPut();occupy(p,s);wobble(p);wake()}           // into one of the two small boxes
+function floatAt(p,x,y){release(p);setOut(p,false);p.tx=x;p.ty=y;p.trot=0;p.ts=1;popPut();wobble(p);wake()}
+function cancelWeb(){
+  if(!web)return;
+  const w=web;web=null;w.el.remove();
+  if(w.s.piece===w.p&&w.p.slot!==w.s)w.s.piece=null;          // give back the reserved place
+}
+function webBack(p){                          // Azad shoots a web at his box and pulls himself back in
+  let s=(p.homeSlot&&!p.homeSlot.piece)?p.homeSlot:null;
+  if(!s)s=legSlots.filter(q=>q.box==='a'&&!q.piece).sort((m,n)=>Math.hypot(m.c.x-p.tx,m.c.y-p.ty)-Math.hypot(n.c.x-p.tx,n.c.y-p.ty))[0]||null;
+  if(!s){floatAt(p,p.tx,p.ty);return}
+  s.piece=p;                                  // reserve it
+  const el=document.createElement('div');el.className='web';
+  el.style.setProperty('--cx',s.c.x+OX);el.style.setProperty('--cy',s.c.y+OY);
+  layer.appendChild(el);
+  const w=web={el,p,s,go:false};
+  setTimeout(()=>{if(web===w){w.go=true;pop(1500,350,.14,.3);occupy(p,s);wake()}},230);   // thwip! swing back
+  pop(1100,500,.1,.25);wake();
+}
+function throwOut(p,x,y){                     // dropped outside the boxes
+  release(p);p.tx=x;p.ty=y;p.trot=0;p.ts=1;
+  if(plain){popPut();wobble(p);wake();return}
+  if(p.who==='azad'){webBack(p);return}
+  setOut(p,true);
+  if(p.who==='ayman')pop(220,90,.45,.4);      // a furious grumble
+  else pop(520,170,.5,.3);                    // a sad little wail
+  wobble(p);wake();
 }
 
 /* ---------- drag & drop ---------- */
-let cur=null,activeId=null,off={x:0,y:0},cand=null,won=false,busy=false,runId=0;
-function toUnits(e){
-  const r=stage.getBoundingClientRect(),u=r.width/UW;
-  return{x:(e.clientX-r.left)/u-OX,y:(e.clientY-r.top)/u-OY};
+let Z=10,lite=false,plain=false,cur=null,activeId=null,off={x:0,y:0},cand=null,won=false,busy=false,runId=0;
+function toUnits(e){                      // uses the cached stage position: no layout work while dragging
+  return{x:(e.clientX-R.left)/U-OX,y:(e.clientY-R.top)/U-OY};
 }
 function down(e,p){
   if(cur||busy||(e.button>0))return;
-  e.preventDefault();audio();
+  e.preventDefault();popOut();
+  R=stage.getBoundingClientRect();
+  cancelWeb();
   cur=p;activeId=e.pointerId;p.dragging=true;p.el.classList.add('drag');p.el.classList.remove('idle');
   try{p.el.setPointerCapture(e.pointerId)}catch(_){}          // keep following the finger outside the window
-  layer.appendChild(p.el);                                    // bring to front
+  p.el.style.zIndex=++Z;                                      // bring to front
   const u=toUnits(e);off={x:p.x-u.x,y:p.y-u.y};
   p.ts=LIFT;
-  if(p.cell){setCell(p.cell,'');p.cell.piece=null;p.cell=null;updateCount()}
-  popOut();wobble(p);
-  clearWin();
+  const wasBig=p.slot&&p.slot.box==='h';
+  release(p);setOut(p,false);
+  if(wasBig)updateCount();
+  if(!plain){tag.textContent=p.name;placeTag();tag.classList.add('show')}
+  wobble(p);
+  clearWin();wake();
 }
 function nearestFree(x,y){
   let best=null,bd=1.15;
-  for(const c of cells){if(c.piece)continue;const d=Math.hypot(c.c.x-x,c.c.y-y);if(d<bd){bd=d;best=c}}
+  for(const s of slots){if(s.piece)continue;const d=Math.hypot(s.c.x-x,s.c.y-y);if(d<bd){bd=d;best=s}}
   return best;
 }
 function move(e){
   if(!cur||e.pointerId!==activeId)return;
-  const u=toUnits(e),x=u.x+off.x,y=u.y+off.y;
+  const u=toUnits(e);
+  const x=Math.min(MAXX,Math.max(MINX,u.x+off.x)),y=Math.min(MAXY,Math.max(MINY,u.y+off.y));
   const c=nearestFree(x,y);
-  if(cand&&cand!==c)setCell(cand,'');
+  if(cand&&cand!==c)cand.el.classList.remove('hot');
   cand=c;
-  if(c){setCell(c,'hot');cur.tx=c.c.x;cur.ty=c.c.y;cur.trot=HROT;cur.ts=PLACED}   // magnet
+  if(c){c.el.classList.add('hot');cur.tx=c.c.x;cur.ty=c.c.y;const h=c.box==='h';cur.trot=h?HROT:0;cur.ts=h?PLACED:LIFT}   // magnet
   else{cur.tx=x;cur.ty=y;cur.trot=0;cur.ts=LIFT}
+  wake();
 }
 function up(e){
   if(!cur||e.pointerId!==activeId)return;
-  const p=cur,c=cand;cur=null;activeId=null;cand=null;p.dragging=false;p.el.classList.remove('drag');
-  if(c){place(p,c,0)}
-  else{p.tx=p.home.x;p.ty=p.home.y;p.trot=0;p.ts=1;p.el.classList.add('idle');popPut();wobble(p)}
+  const p=cur,c=cand;cur=null;activeId=null;cand=null;p.dragging=false;p.el.classList.remove('drag');tag.classList.remove('show');
+  if(c){c.el.classList.remove('hot');if(c.box==='h')place(p,c,0);else settle(p,c);return}
+  const x=p.tx,y=p.ty,bx=boxAt(x,y);
+  if(bx){                                     // inside a box: sit in its nearest free place (or stay where dropped)
+    const free=slots.filter(s=>s.box===bx&&!s.piece).sort((m,n)=>Math.hypot(m.c.x-x,m.c.y-y)-Math.hypot(n.c.x-x,n.c.y-y));
+    if(free.length){if(bx==='h')place(p,free[0],0);else settle(p,free[0])}
+    else floatAt(p,x,y);
+  }else throwOut(p,x,y);                      // outside every box: out you go
 }
 pieces.forEach(p=>p.el.addEventListener('pointerdown',e=>down(e,p)));
 window.addEventListener('pointermove',move);
@@ -471,7 +768,7 @@ function updateCount(){
   const t=a+b;
   $('ca').textContent=a;$('cb').textContent=b;$('ct').textContent=t;
   $('ea').textContent=a;$('eb').textContent=b;$('ec').textContent=t;
-  $('ba').style.width=a/9*100+'%';$('bb').style.width=b/16*100+'%';$('bt').style.width=t/25*100+'%';
+  $('ba').style.transform='scaleX('+(a/9)+')';$('bb').style.transform='scaleX('+(b/16)+')';$('bt').style.transform='scaleX('+(t/25)+')';
   syncAuto();
   if(t===25&&!won){won=true;setTimeout(()=>{if(won)celebrate()},450)}
 }
@@ -489,7 +786,8 @@ function celebrate(){
 function autofill(){
   if(busy||cur)return;
   audio();
-  const todo=pieces.filter(p=>!p.cell);
+  cancelWeb();
+  const todo=pieces.filter(p=>!(p.slot&&p.slot.box==='h'));
   const free=cells.filter(c=>!c.piece).sort((a,b)=>(a.j-b.j)||(a.i-b.i));   // the row next to the triangle first
   if(!todo.length)return;
   busy=true;syncAuto();clearWin();
@@ -498,7 +796,7 @@ function autofill(){
     if(my!==runId)return;
     if(n>=todo.length){busy=false;syncAuto();return}
     const p=todo[n],c=free[n];
-    p.el.classList.remove('idle');layer.appendChild(p.el);
+    p.el.classList.remove('idle');
     place(p,c,n);n++;
     setTimeout(step,150);
   })();
@@ -506,18 +804,24 @@ function autofill(){
 
 /* ---------- reset ---------- */
 function reset(){
-  audio();runId++;busy=false;clearWin();stage.classList.remove('started');
+  audio();runId++;busy=false;clearWin();stage.classList.remove('started');cancelWeb();
   if(cur){cur.dragging=false;cur.el.classList.remove('drag');cur=null;activeId=null;cand=null}
+  tag.classList.remove('show');
+  slots.forEach(s=>{s.piece=null;s.el.classList.remove('hot','full')});
   pieces.forEach((p,i)=>{
-    if(p.cell){setCell(p.cell,'');p.cell.piece=null;p.cell=null}
-    p.tx=p.home.x;p.ty=p.home.y;p.trot=0;p.ts=1;p.el.classList.add('idle');
+    p.slot=null;setOut(p,false);occupy(p,p.homeSlot);p.el.classList.add('idle');
     setTimeout(()=>{popPut(i%8);wobble(p)},i*25);
   });
-  cells.forEach(c=>setCell(c,''));
-  updateCount();
+  updateCount();wake();
 }
 $('auto').addEventListener('click',autofill);
 $('reset').addEventListener('click',reset);
+const FACE_ON='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></svg>',FACE_OFF='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/><path d="M4 4l16 16"/></svg>';
+$('pers').addEventListener('click',()=>{
+  plain=!plain;stage.classList.toggle('plain',plain);tag.classList.remove('show');
+  $('pers').innerHTML=plain?FACE_OFF:FACE_ON;$('pers').setAttribute('aria-pressed',String(!plain));
+  popPut();
+});
 $('mute').addEventListener('click',()=>{
   muted=!muted;audio();
   $('mute').innerHTML=muted?SPK_OFF:SPK_ON;$('mute').setAttribute('aria-pressed',String(muted));
