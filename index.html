@@ -178,10 +178,10 @@
   .piece.drag[class*="rx-"] .inner i.fx{display:block}
   .piece.drag[class*="rx-"] .inner i.sweat{display:none}
   .piece.drag[class*="rx-"] .eye::before{opacity:0}
-  .piece.drag.rx-calm .inner,.piece.drag.rx-bstar .inner,.piece.drag.rx-glad .inner,.piece.drag.rx-happy .inner,.piece.drag.rx-smile .inner,.piece.drag.rx-poised .inner,.piece.drag.rx-shy .inner,.piece.drag.rx-bulb .inner,.piece.drag.rx-proud .inner,.piece.drag.rx-ask .inner,
+  .piece.drag.rx-calm .inner,.piece.drag.rx-yap .inner,.piece.drag.rx-bstar .inner,.piece.drag.rx-glad .inner,.piece.drag.rx-happy .inner,.piece.drag.rx-smile .inner,.piece.drag.rx-poised .inner,.piece.drag.rx-shy .inner,.piece.drag.rx-bulb .inner,.piece.drag.rx-proud .inner,.piece.drag.rx-ask .inner,
   .piece.drag.rx-yawn .inner,.piece.drag.rx-shrug .inner,.piece.drag.rx-think .inner,.piece.drag.rx-chat .inner,.piece.drag.rx-hearts .inner,.piece.drag.rx-soft .inner,.piece.drag.rx-softstar .inner,.piece.drag.rx-stern .inner,.piece.drag.rx-smug .inner,.piece.drag.rx-spidey .inner{animation:none}
   /* eyes */
-  .piece.drag.rx-calm .eye,.piece.drag.rx-bstar .eye,.piece.drag.rx-smile .eye,.piece.drag.rx-poised .eye,.piece.drag.rx-think .eye,.piece.drag.rx-bulb .eye,.piece.drag.rx-ask .eye,.piece.drag.rx-chat .eye,.piece.drag.rx-stern .eye,.piece.drag.rx-bounce .eye{
+  .piece.drag.rx-calm .eye,.piece.drag.rx-yap .eye,.piece.drag.rx-bstar .eye,.piece.drag.rx-smile .eye,.piece.drag.rx-poised .eye,.piece.drag.rx-think .eye,.piece.drag.rx-bulb .eye,.piece.drag.rx-ask .eye,.piece.drag.rx-chat .eye,.piece.drag.rx-stern .eye,.piece.drag.rx-bounce .eye{
      width:calc(var(--c)*14);height:calc(var(--c)*14);margin:calc(var(--c)*-7) 0 0 calc(var(--c)*-7);background:#2b1a4d;border:0}
   .piece.drag.rx-proud .eye,.piece.drag.rx-happy .eye,.piece.drag.rx-glad .eye,.piece.drag.rx-hearts .eye,.piece.drag.rx-soft .eye,.piece.drag.rx-softstar .eye{width:calc(var(--c)*18);height:calc(var(--c)*10);margin:calc(var(--c)*-3) 0 0 calc(var(--c)*-9);background:transparent;border:0;border-top:calc(var(--c)*5) solid #2b1a4d;border-radius:99px 99px 0 0}
   .piece.drag.rx-shy .eye{width:calc(var(--c)*16);height:calc(var(--c)*8);margin:calc(var(--c)*-2) 0 0 calc(var(--c)*-8);background:transparent;border:0;border-bottom:calc(var(--c)*4) solid #2b1a4d;border-radius:0 0 99px 99px}
@@ -226,6 +226,8 @@
   .rx-think .fx::after{content:"";position:absolute;left:calc(var(--c)*1);top:calc(var(--c)*5);width:calc(var(--c)*16);height:calc(var(--c)*16);border-radius:50%;background:#fde047;box-shadow:0 0 0 calc(var(--c)*3) #fbbf24,0 0 calc(var(--c)*14) calc(var(--c)*6) rgba(250,204,21,.6);opacity:0;animation:qb 1.8s ease-in-out infinite}
   @keyframes qa{0%,42%{opacity:1}58%,100%{opacity:0}}
   @keyframes qb{0%,42%{opacity:0}58%,100%{opacity:1}}
+  .piece.drag.rx-yap .eye::before{opacity:1}
+  .piece.drag.rx-yap .eye.l::before{transform:rotate(18deg)}.piece.drag.rx-yap .eye.r::before{transform:rotate(-18deg)}
   .piece.drag.rx-chill .inner{animation:sway 2.6s ease-in-out infinite}
   .rx-chill .fx::before{content:"\2605";color:#f59e0b}
   @keyframes sway{0%,100%{rotate:-1.5deg}50%{rotate:1.5deg}}
@@ -236,7 +238,7 @@
   @keyframes hop{0%,100%{translate:0 0}50%{translate:0 calc(var(--c)*-5)}}
 
   /* the name tag that pops up while a square is held */
-  #tag{position:absolute;z-index:9;left:calc(var(--u)*var(--cx,0));top:calc(var(--u)*var(--cy,0));transform:translate(-50%,-100%) scale(.6);opacity:0;pointer-events:none;
+  #tag{unicode-bidi:plaintext;position:absolute;z-index:9;left:calc(var(--u)*var(--cx,0));top:calc(var(--u)*var(--cy,0));transform:translate(-50%,-100%) scale(.6);opacity:0;pointer-events:none;
        background:#111827;color:#fff;font-weight:700;font-size:calc(var(--u)*.4);line-height:1;white-space:nowrap;
        padding:calc(var(--u)*.14) calc(var(--u)*.32);border-radius:99px;box-shadow:0 4px 12px rgba(17,24,39,.3);transition:opacity .12s,transform .16s cubic-bezier(.3,1.6,.5,1)}
   #tag::after{content:"";position:absolute;left:50%;bottom:calc(var(--u)*-.1);width:calc(var(--u)*.2);height:calc(var(--u)*.2);margin-left:calc(var(--u)*-.1);background:#111827;transform:rotate(45deg);border-radius:2px}
@@ -259,7 +261,20 @@
   .web{position:absolute;left:calc(var(--u)*var(--cx));top:calc(var(--u)*var(--cy));height:calc(var(--u)*.05);margin-top:calc(var(--u)*-.025);background:#f8fafc;
        border-radius:9px;transform-origin:0 50%;box-shadow:0 0 0 calc(var(--u)*.022) #94a3b8;pointer-events:none;z-index:4;transition:opacity .25s}
   .web.fade{opacity:0}
-  /* thrown out of the boxes: they cry (Mr. Ayman is furious; Azad webs his way back) */
+  /* maths always reads left to right, even inside the Arabic screen; the Arabic "hmph" keeps its "!" on the correct side */
+  .lbl,.badge,.eqline,.num,.winline b{direction:ltr;unicode-bidi:bidi-override}
+  .piece.out.c-somia .inner i.fx{direction:rtl}
+  /* while Ms. Somia is held the whole screen turns Arabic, with a short glitch each way */
+  body.ar header,body.ar .panel,body.ar footer,body.ar .btns{direction:rtl}
+  body.ar #result{direction:ltr}
+  body.ar h1{letter-spacing:0}
+  @keyframes glitch{0%{transform:translate(0,0)}15%{transform:translate(-4px,1px) skewX(2deg)}30%{transform:translate(4px,-2px)}45%{transform:translate(-3px,-1px) skewX(-2deg)}60%{transform:translate(3px,2px)}75%{transform:translate(-2px,0)}100%{transform:none}}
+  body.glitch header,body.glitch .panel,body.glitch footer{animation:glitch .42s steps(1) 1;text-shadow:2px 0 rgba(255,0,110,.7),-2px 0 rgba(0,210,255,.7)}
+  body.glitch::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;
+     background:repeating-linear-gradient(0deg,rgba(255,0,110,.12) 0 2px,transparent 2px 7px),linear-gradient(90deg,rgba(0,220,255,.14),rgba(255,0,110,.12));
+     animation:gfade .42s steps(5) 1 forwards}
+  @keyframes gfade{0%{opacity:1}100%{opacity:0}}
+  /* thrown out of the boxes: they cry (Ms. Somia is furious; Azad webs his way back) */
   .piece.out:not(.drag) .eye{width:calc(var(--c)*16);height:calc(var(--c)*8);margin:calc(var(--c)*-2) 0 0 calc(var(--c)*-8);background:transparent;border:0;border-bottom:calc(var(--c)*4) solid #2b1a4d;border-radius:0 0 99px 99px}
   .piece.out:not(.drag) .eye::before{opacity:1;background:#2b1a4d}
   .piece.out:not(.drag) .mouth{width:calc(var(--c)*22);height:calc(var(--c)*14);margin-left:calc(var(--c)*-11);top:calc(50% + calc(var(--c)*8));border:calc(var(--c)*4) solid #2b1a4d;border-bottom:0;border-radius:99px 99px 0 0;background:#7a2d4a}
@@ -279,15 +294,40 @@
   @keyframes tearR{0%{transform:translate(0,0) scale(.5);opacity:0}10%{opacity:1}38%{transform:translate(calc(var(--c)*30),calc(var(--c)*-24)) scale(1)}100%{transform:translate(calc(var(--c)*86),calc(var(--c)*46)) scale(.9) rotate(40deg);opacity:0}}
   @keyframes tearL2{0%{transform:translate(0,0) scale(.5);opacity:0}10%{opacity:1}35%{transform:translate(calc(var(--c)*-52),calc(var(--c)*-40)) scale(1.1)}100%{transform:translate(calc(var(--c)*-120),calc(var(--c)*62)) scale(.9) rotate(-60deg);opacity:0}}
   @keyframes tearR2{0%{transform:translate(0,0) scale(.5);opacity:0}10%{opacity:1}35%{transform:translate(calc(var(--c)*52),calc(var(--c)*-40)) scale(1.1)}100%{transform:translate(calc(var(--c)*120),calc(var(--c)*62)) scale(.9) rotate(60deg);opacity:0}}
-  .piece.out.c-ayman:not(.drag) .inner{background:#c2410c;border-color:#7c2d12;animation:shake .07s linear infinite}
-  .piece.out.c-ayman:not(.drag) .eye{width:calc(var(--c)*12);height:calc(var(--c)*12);margin:calc(var(--c)*-6) 0 0 calc(var(--c)*-6);background:#2b1a4d;border:0;border-radius:50%}
-  .piece.out.c-ayman:not(.drag) .eye::before{opacity:1;background:#1a1210;height:calc(var(--c)*5)}
-  .piece.out.c-ayman:not(.drag) .eye.l::before{transform:rotate(22deg)}
-  .piece.out.c-ayman:not(.drag) .eye.r::before{transform:rotate(-22deg)}
-  .piece.out.c-ayman:not(.drag) .eye::after,.piece.out.c-ayman:not(.drag) .inner i.sweat{display:none}
-  .piece.out.c-ayman:not(.drag) .mouth{width:calc(var(--c)*38);height:calc(var(--c)*22);margin-left:calc(var(--c)*-19);top:calc(50% + calc(var(--c)*8));border:calc(var(--c)*4) solid #efe2d3;border-radius:calc(var(--c)*5) calc(var(--c)*5) calc(var(--c)*20) calc(var(--c)*20);background:#7a2d4a}
-  .piece.out.c-ayman .inner i.fx{display:block}
-  .piece.out.c-ayman .fx::before{content:"!!!";color:#dc2626}
+  /* Ms. Somia thrown out: angry, but in a feminine way (pouting, puffed pink cheeks, stomping, puffs of steam, "hmph!") */
+  .piece.out.c-somia:not(.drag) .inner{animation:stomp .45s ease-in-out infinite}
+  .piece.out.c-somia:not(.drag) .eye{width:calc(var(--c)*14);height:calc(var(--c)*7);margin:calc(var(--c)*-1) 0 0 calc(var(--c)*-7);background:#2b1a4d;border:0;border-radius:0 0 99px 99px}
+  .piece.out.c-somia:not(.drag) .eye::before{opacity:1;background:#2b1a4d;height:calc(var(--c)*4)}
+  .piece.out.c-somia:not(.drag) .eye.l::before{transform:rotate(20deg)}
+  .piece.out.c-somia:not(.drag) .eye.r::before{transform:rotate(-20deg)}
+  .piece.out.c-somia:not(.drag) .eye::after{display:none}
+  .piece.out.c-somia:not(.drag) .mouth{width:calc(var(--c)*16);height:calc(var(--c)*9);margin-left:calc(var(--c)*-8);top:calc(50% + calc(var(--c)*10));border:calc(var(--c)*3.5) solid #2b1a4d;border-bottom:0;border-radius:99px 99px 0 0;background:transparent}
+  .piece.out.c-somia:not(.drag) .cheek{opacity:.95;width:calc(var(--c)*22);height:calc(var(--c)*18);margin-left:calc(var(--c)*-11);top:calc(50% + calc(var(--c)*2))}
+  .piece.out.c-somia:not(.drag) .cheek.l{left:calc(50% - calc(var(--c)*27))}
+  .piece.out.c-somia:not(.drag) .cheek.r{left:calc(50% + calc(var(--c)*27))}
+  .piece.out.c-somia .inner i.fx{display:block}
+  .piece.out.c-somia .fx::before{content:"هممم!";color:#be185d}
+  .piece.out.c-somia:not(.drag) .inner i.sweat::before,.piece.out.c-somia:not(.drag) .inner i.sweat::after{
+     width:calc(var(--c)*15);height:calc(var(--c)*15);margin:calc(var(--c)*-7) 0 0 calc(var(--c)*-7);top:calc(var(--c)*-34);background:#fff;border:calc(var(--c)*2) solid #cbd5e1;border-radius:50%;box-shadow:none;animation:puff .9s ease-out infinite}
+  .piece.out.c-somia:not(.drag) .inner i.sweat::before{left:calc(var(--c)*-24)}
+  .piece.out.c-somia:not(.drag) .inner i.sweat::after{left:calc(var(--c)*24);animation-delay:.4s}
+  @keyframes stomp{0%,100%{translate:0 0;rotate:-3deg}50%{translate:0 calc(var(--c)*-4);rotate:3deg}}
+  @keyframes puff{0%{transform:translateY(0) scale(.5);opacity:.95}100%{transform:translateY(calc(var(--c)*-30)) scale(1.25);opacity:0}}
+  /* Ms. Somia never stops talking: her mouth keeps moving and speech clouds puff out and fade (faster when she is held) */
+  .piece.c-somia{z-index:3}
+  .piece.c-somia:not(.out) .mouth{width:calc(var(--c)*24);height:calc(var(--c)*18);margin-left:calc(var(--c)*-12);top:calc(50% + calc(var(--c)*4));background:#7a2d4a;border:calc(var(--c)*3) solid #2b1a4d;border-top:0;border-radius:0 0 calc(var(--c)*24) calc(var(--c)*24);
+     transform-origin:50% 0;animation:yap .55s ease-in-out infinite}
+  .piece.c-somia.drag .mouth{animation-duration:.18s}
+  .piece.c-somia .inner i.acc,.piece.c-somia .inner i.acc2{display:block;width:calc(var(--c)*30);height:calc(var(--c)*20);background:#fff;border:calc(var(--c)*2) solid #cbd5e1;border-radius:99px;opacity:0;pointer-events:none;animation:bub 1.3s ease-out infinite}
+  .piece.c-somia .inner i.acc{left:70%;top:calc(var(--c)*-28)}
+  .piece.c-somia .inner i.acc2{left:96%;top:calc(var(--c)*-4);animation-delay:.65s}
+  .piece.c-somia .inner i.acc::before,.piece.c-somia .inner i.acc2::before{content:"\00B7\00B7\00B7";position:absolute;left:0;right:0;top:0;bottom:0;display:flex;align-items:center;justify-content:center;color:#6b7280;font-weight:800;font-size:calc(var(--u)*.26);line-height:1;letter-spacing:-.04em;padding-bottom:calc(var(--u)*.04)}
+  .piece.c-somia .inner i.acc::after,.piece.c-somia .inner i.acc2::after{content:"";position:absolute;left:calc(var(--c)*4);bottom:calc(var(--c)*-8);width:calc(var(--c)*9);height:calc(var(--c)*9);background:#fff;border:calc(var(--c)*2) solid #cbd5e1;border-radius:50%}
+  .piece.c-somia.drag .inner i.acc,.piece.c-somia.drag .inner i.acc2{animation-duration:.5s}
+  .piece.c-somia.drag .inner i.acc2{animation-delay:.25s}
+  .piece.out.c-somia .inner i.acc,.piece.out.c-somia .inner i.acc2{display:none}
+  @keyframes bub{0%{transform:translate(calc(var(--c)*-10),calc(var(--c)*12)) scale(.3);opacity:0}15%{opacity:1}65%{opacity:1}100%{transform:translate(calc(var(--c)*8),calc(var(--c)*-16)) scale(1);opacity:0}}
+  @keyframes yap{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
   #stage:not(.started) .hypline{animation:hint 1.8s ease-in-out infinite}
   @keyframes hint{0%,100%{opacity:1}50%{opacity:.35}}
   .burst{width:0;height:0;pointer-events:none}
@@ -376,8 +416,8 @@
 </head>
 <body>
 <header>
-  <h1>Pythagorean Theorem Game</h1>
-  <p class="sub">Drag the small squares into the big square. Will they fit exactly?</p>
+  <h1 data-ar="لعبة نظرية فيثاغورس">Pythagorean Theorem Game</h1>
+  <p class="sub" data-ar="اسحبوا المربعات الصغيرة إلى المربع الكبير. هل سيمتلئ؟">Drag the small squares into the big square. Will they fit exactly?</p>
   <button id="pers" type="button" aria-label="Characters on or off" aria-pressed="true" title="Characters on / off"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></svg></button>
   <button id="mute" type="button" aria-label="Sound on or off" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/></svg></button>
   <noscript><div class="nojs">This game needs JavaScript. Open the file in Chrome, Safari or Edge (double-click it).</div></noscript>
@@ -441,17 +481,17 @@
 <div class="bx cell" data-box="h" data-i="4" data-j="2" data-cx="2.3" data-cy="-5.1" style="--x:6.15;--y:2.85;--w:1;--h:1"></div>
 <div class="bx cell" data-box="h" data-i="4" data-j="3" data-cx="3.1" data-cy="-5.7" style="--x:6.95;--y:2.25;--w:1;--h:1"></div>
 <div class="bx cell" data-box="h" data-i="4" data-j="4" data-cx="3.9" data-cy="-6.3" style="--x:7.75;--y:1.65;--w:1;--h:1"></div>
-<div class="lbl"  style="--cx:5.85;--cy:12;--fs:.56;color:#D97706">3² = 9</div>
-<div class="lbl"  style="--cx:2.35;--cy:3.95;--fs:.56;color:#0284C7">4² = 16</div>
-<div class="lbl"  style="--cx:7.85;--cy:0.52;--fs:.62;color:#4F46E5">5² = 25</div>
+<div class="lbl" data-ar="٣² = ٩" style="--cx:5.85;--cy:12;--fs:.56;color:#D97706">3² = 9</div>
+<div class="lbl" data-ar="٤² = ١٦" style="--cx:2.35;--cy:3.95;--fs:.56;color:#0284C7">4² = 16</div>
+<div class="lbl" data-ar="٥² = ٢٥" style="--cx:7.85;--cy:0.52;--fs:.62;color:#4F46E5">5² = 25</div>
       </div>
       <div id="layer">
 <div class="piece a c-nour rx-soft hr-hijab gl girl" data-kind="a" data-hx="0.5" data-hy="0.5" data-name="Ms. Nour" style="--x:4.85;--y:8.95;--r:0deg;--s:1;--hc:#0f766e"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
 <div class="piece a c-hamza rx-smile" data-kind="a" data-hx="1.5" data-hy="0.5" data-name="Mr. Hamza" style="--x:5.85;--y:8.95;--r:0deg;--s:1"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
 <div class="piece a c-mona rx-soft hr-hijab gl i-poised girl" data-kind="a" data-hx="2.5" data-hy="0.5" data-name="Ms. Mona" style="--x:6.85;--y:8.95;--r:0deg;--s:1;--hc:#64748b"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
-<div class="piece a c-ayman rx-smug hr-semi a2-mustache bd" data-kind="a" data-hx="0.5" data-hy="1.5" data-name="Mr. Ayman" style="--x:4.85;--y:9.95;--r:0deg;--s:1;--hc:#1f1a17;--bg:#b45f06;--bd:#7c3f06"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
-<div class="piece a c-maha rx-soft hr-hijab lips girl" data-kind="a" data-hx="1.5" data-hy="1.5" data-name="Ms. Maha" style="--x:5.85;--y:9.95;--r:0deg;--s:1;--hc:#9f1239"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
-<div class="piece a c-tamim rx-bounce hr-short i-small i-full" data-kind="a" data-hx="2.5" data-hy="1.5" data-name="Tamim" style="--x:6.85;--y:9.95;--r:0deg;--s:1;--hc:#111827;--bg:#c4680a;--bd:#8a4a0c"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece a c-somia rx-yap hr-hijab girl" data-kind="a" data-hx="0.5" data-hy="1.5" data-name="مس. سمية" style="--x:4.85;--y:9.95;--r:0deg;--s:1;--hc:#6d28d9"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece a c-baraa rx-soft hr-hijab girl" data-kind="a" data-hx="1.5" data-hy="1.5" data-name="Ms. Baraa&#39;a" style="--x:5.85;--y:9.95;--r:0deg;--s:1;--hc:#1e3a8a"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece a c-tasneem rx-bulb hr-hijab girl" data-kind="a" data-hx="2.5" data-hy="1.5" data-name="Ms. Tasneem" style="--x:6.85;--y:9.95;--r:0deg;--s:1;--hc:#15803d"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
 <div class="piece a c-ahed rx-chill hr-short i-small" data-kind="a" data-hx="0.5" data-hy="2.5" data-name="Ahed" style="--x:4.85;--y:10.95;--r:0deg;--s:1;--hc:#a16207;--bg:#fcd34d;--bd:#f0b429"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
 <div class="piece a c-azad rx-spidey spider" data-kind="a" data-hx="1.5" data-hy="2.5" data-name="Azad" style="--x:5.85;--y:10.95;--r:0deg;--s:1"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
 <div class="piece a c-diaa rx-scream hr-short" data-kind="a" data-hx="2.5" data-hy="2.5" data-name="Diaa&#39;" style="--x:6.85;--y:10.95;--r:0deg;--s:1;--hc:#7c2d12"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
@@ -478,10 +518,10 @@
 <div class="edge"  style="--cx:4.35;--cy:6.45;--len:4.12;--rot:90deg"></div>
 <div class="edge"  style="--cx:5.85;--cy:6.45;--len:5.12;--rot:53.13deg"></div>
 <div class="bx mark"  style="--x:4.35;--y:7.7;--w:0.75;--h:0.75"></div>
-<div class="lbl"  style="--cx:5.65;--cy:7.33;--fs:.34;color:#1E1B4B">90°</div>
-<div class="badge"  style="--cx:5.85;--cy:8;background:#D97706">3</div>
-<div class="badge"  style="--cx:4.8;--cy:6.45;background:#0284C7">4</div>
-<div class="badge"  style="--cx:5.47;--cy:6.73;background:#4F46E5">5</div>
+<div class="lbl" data-ar="٩٠°" style="--cx:5.65;--cy:7.33;--fs:.34;color:#1E1B4B">90°</div>
+<div class="badge" data-ar="٣" style="--cx:5.85;--cy:8;background:#D97706">3</div>
+<div class="badge" data-ar="٤" style="--cx:4.8;--cy:6.45;background:#0284C7">4</div>
+<div class="badge" data-ar="٥" style="--cx:5.47;--cy:6.73;background:#4F46E5">5</div>
       </div>
       <div id="tag"></div>
     </div>
@@ -490,35 +530,35 @@
 
 <section class="panel" aria-label="Progress">
   <div class="card">
-    <div class="lab"><i style="background:#f59e0b"></i>Side 3</div>
-    <div class="num"><span id="ca">0</span><small>/9</small></div>
+    <div class="lab"><i style="background:#f59e0b"></i><span data-ar="الضلع ٣">Side 3</span></div>
+    <div class="num"><span id="ca">0</span><small data-ar="/٩">/9</small></div>
     <div class="bar"><span id="ba" style="background:#f59e0b"></span></div>
   </div>
   <div class="card">
-    <div class="lab"><i style="background:#0ea5e9"></i>Side 4</div>
-    <div class="num"><span id="cb">0</span><small>/16</small></div>
+    <div class="lab"><i style="background:#0ea5e9"></i><span data-ar="الضلع ٤">Side 4</span></div>
+    <div class="num"><span id="cb">0</span><small data-ar="/١٦">/16</small></div>
     <div class="bar"><span id="bb" style="background:#0ea5e9"></span></div>
   </div>
   <div class="card">
-    <div class="lab"><i style="background:#4f46e5"></i>Hypotenuse</div>
-    <div class="num"><span id="ct">0</span><small>/25</small></div>
+    <div class="lab"><i style="background:#4f46e5"></i><span data-ar="الوتر">Hypotenuse</span></div>
+    <div class="num"><span id="ct">0</span><small data-ar="/٢٥">/25</small></div>
     <div class="bar"><span id="bt" style="background:#4f46e5"></span></div>
   </div>
 
   <div id="result" aria-live="polite">
     <div class="eqline"><span class="o" id="ea">0</span><span class="op">+</span><span class="b" id="eb">0</span><span class="op">=</span><span class="t" id="ec">0</span></div>
-    <div class="winline"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.7 2.7L16.5 9.5"/></svg><div>It fits exactly<b>3² + 4² = 5²</b></div></div>
+    <div class="winline"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.7 2.7L16.5 9.5"/></svg><div><span data-ar="امتلأ تمامًا">It fits exactly</span><b data-ar="٣² + ٤² = ٥²">3² + 4² = 5²</b></div></div>
   </div>
 
   <div class="btns">
-    <button id="auto" type="button"><svg viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg>Auto fill</button>
-    <button id="reset" type="button"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Start over</button>
+    <button id="auto" type="button"><svg viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg><span data-ar="تعبئة تلقائية">Auto fill</span></button>
+    <button id="reset" type="button"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg><span data-ar="ابدأ من جديد">Start over</span></button>
   </div>
 </section>
 
 <footer>
-  <span><b>Idea by:</b> Ms. Nour Kaware</span>
-  <span><b>Made by:</b> Mr. Hamza Ashour</span>
+  <span><b data-ar="فكرة:">Idea by:</b> <span data-ar="مس نور كوارع">Ms. Nour Kaware</span></span>
+  <span><b data-ar="تنفيذ:">Made by:</b> <span data-ar="مستر حمزة عاشور">Mr. Hamza Ashour</span></span>
 </footer>
 
 <script>
@@ -528,6 +568,18 @@ const OX=4.35,OY=8.45,UW=11.7;
 const HROT=-36.87, PLACED=1.075, LIFT=1.12;
 const $=id=>document.getElementById(id);
 const tag=$('tag');
+const i18n=[...document.querySelectorAll('[data-ar]')];
+i18n.forEach(el=>{el.dataset.en=el.textContent});
+let ar=false;
+const ARD='٠١٢٣٤٥٦٧٨٩';
+const N=n=>ar?String(n).replace(/\d/g,d=>ARD[d]):String(n);       // digits turn Arabic-Indic too
+function setLang(on){                                              // the whole screen flips to Arabic, with a glitch
+  if(ar===on)return;ar=on;
+  document.body.classList.add('glitch');setTimeout(()=>document.body.classList.remove('glitch'),460);
+  document.body.classList.toggle('ar',on);document.documentElement.lang=on?'ar':'en';
+  i18n.forEach(el=>{el.textContent=on?el.dataset.ar:el.dataset.en});
+  updateCount();
+}
 const SPK_ON='<svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/></svg>';
 const SPK_OFF='<svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4z"/><path d="M22 9l-6 6"/><path d="M16 9l6 6"/></svg>';
 
@@ -549,7 +601,7 @@ const MINX=-4.35+.5,MAXX=7.35-.5,MINY=-8.45+.5,MAXY=4.25-.5;   // squares can ne
 (function joyLoop(){
   setTimeout(()=>{
     if(!document.hidden&&!busy&&!plain&&!lite){
-      const pool=pieces.filter(p=>!p.dragging&&!p.out&&!p.el.classList.contains('joy')&&!p.el.classList.contains('spider'));
+      const pool=pieces.filter(p=>!p.dragging&&!p.out&&p.who!=='somia'&&!p.el.classList.contains('joy')&&!p.el.classList.contains('spider'));
       const p=pool[Math.floor(Math.random()*pool.length)];
       if(p){p.el.classList.add('joy');setTimeout(()=>p.el.classList.remove('joy'),900+Math.random()*800)}
     }
@@ -702,7 +754,7 @@ function throwOut(p,x,y){                     // dropped outside the boxes
   if(plain){popPut();wobble(p);wake();return}
   if(p.who==='azad'){webBack(p);return}
   setOut(p,true);
-  if(p.who==='ayman')pop(220,90,.45,.4);      // a furious grumble
+  if(p.who==='somia'){pop(780,520,.18,.3);setTimeout(()=>pop(700,420,.22,.3),170)}      // a furious grumble
   else pop(520,170,.5,.3);                    // a sad little wail
   wobble(p);wake();
 }
@@ -726,6 +778,7 @@ function down(e,p){
   release(p);setOut(p,false);
   if(wasBig)updateCount();
   if(!plain){tag.textContent=p.name;placeTag();tag.classList.add('show')}
+  if(p.who==='somia'&&!plain)setLang(true);
   wobble(p);
   clearWin();wake();
 }
@@ -748,6 +801,7 @@ function move(e){
 function up(e){
   if(!cur||e.pointerId!==activeId)return;
   const p=cur,c=cand;cur=null;activeId=null;cand=null;p.dragging=false;p.el.classList.remove('drag');tag.classList.remove('show');
+  if(p.who==='somia')setLang(false);
   if(c){c.el.classList.remove('hot');if(c.box==='h')place(p,c,0);else settle(p,c);return}
   const x=p.tx,y=p.ty,bx=boxAt(x,y);
   if(bx){                                     // inside a box: sit in its nearest free place (or stay where dropped)
@@ -767,8 +821,8 @@ function updateCount(){
   let a=0,b=0;
   for(const c of cells)if(c.piece){c.piece.kind==='a'?a++:b++}
   const t=a+b;
-  $('ca').textContent=a;$('cb').textContent=b;$('ct').textContent=t;
-  $('ea').textContent=a;$('eb').textContent=b;$('ec').textContent=t;
+  $('ca').textContent=N(a);$('cb').textContent=N(b);$('ct').textContent=N(t);
+  $('ea').textContent=N(a);$('eb').textContent=N(b);$('ec').textContent=N(t);
   $('ba').style.transform='scaleX('+(a/9)+')';$('bb').style.transform='scaleX('+(b/16)+')';$('bt').style.transform='scaleX('+(t/25)+')';
   syncAuto();
   if(t===25&&!won){won=true;setTimeout(()=>{if(won)celebrate()},450)}
@@ -805,7 +859,7 @@ function autofill(){
 
 /* ---------- reset ---------- */
 function reset(){
-  audio();runId++;busy=false;clearWin();stage.classList.remove('started');cancelWeb();
+  audio();runId++;busy=false;clearWin();stage.classList.remove('started');cancelWeb();setLang(false);
   if(cur){cur.dragging=false;cur.el.classList.remove('drag');cur=null;activeId=null;cand=null}
   tag.classList.remove('show');
   slots.forEach(s=>{s.piece=null;s.el.classList.remove('hot','full')});
