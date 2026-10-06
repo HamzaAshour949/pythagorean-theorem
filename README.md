@@ -9,5 +9,5 @@ Drag the small 1×1 squares from the two short sides (the 3×3 and 4×4 squares)
 - Mobile first: always fits the screen, no scrolling
 - Single file (`index.html`), no dependencies
 
-**Idea by:** Ms. Nour Kawaree
+**Idea by:** Ms. Nour Kaware
 **Made by:** Mr. Hamza Ashour
