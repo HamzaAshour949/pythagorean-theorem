@@ -40,8 +40,8 @@
   #layer{z-index:1}#frame{z-index:2}               /* squares (whatever their raise-to-front number) always stay below the triangle outline and the name tag */
   #frame{pointer-events:none}
   .bx{position:absolute;box-sizing:border-box;left:calc(var(--u)*var(--x));top:calc(var(--u)*var(--y));width:calc(var(--u)*var(--w));height:calc(var(--u)*var(--h))}
-  .sqA{background:#fff6e3;border:calc(var(--u)*.07) solid #d97706}
-  .sqB{background:#e7f5fd;border:calc(var(--u)*.07) solid #0284c7}
+  .sqA{background:#fff6e3;border:calc(var(--u)*.07) solid #f0b429}
+  .sqB{background:#e7f5fd;border:calc(var(--u)*.07) solid #0ea5e9}
   .hyp{background:#f3f4ff}
   .hypline{border:calc(var(--u)*.07) solid #4f46e5;border-radius:calc(var(--u)*.02)}
   .tri{background:#dde1ff;clip-path:polygon(0 0,0 100%,100% 100%)}
@@ -97,7 +97,7 @@
   .hr-cloud .inner i.hair::before{content:"";position:absolute;left:50%;top:calc(var(--c)*-14);width:calc(var(--c)*30);height:calc(var(--c)*30);margin-left:calc(var(--c)*-15);border-radius:50%;background:var(--hc);
      box-shadow:calc(var(--c)*-20) calc(var(--c)*10) 0 calc(var(--c)*-2) var(--hc),calc(var(--c)*20) calc(var(--c)*10) 0 calc(var(--c)*-2) var(--hc),calc(var(--c)*-9) calc(var(--c)*-8) 0 calc(var(--c)*3) var(--hc),calc(var(--c)*10) calc(var(--c)*-7) 0 calc(var(--c)*2) var(--hc)}
   .hr-hijab .inner i.hair{left:0;right:0;top:0;height:auto;bottom:0;border-radius:inherit;
-     background:radial-gradient(ellipse 33% 40% at 50% 55%,transparent 96%,var(--hc) 100%)}
+     background:radial-gradient(ellipse 41% 45% at 50% 54%,transparent 0 96%,var(--hc) 100%)}
   .hr-down .inner i.hair{left:calc(var(--c)*-8);right:calc(var(--c)*-8);top:calc(var(--c)*-11);height:calc(var(--c)*36);border-radius:50% 50% 30% 30% / 85% 85% 30% 30%}
   .hr-down .inner i.hair::before,.hr-down .inner i.hair::after{content:"";position:absolute;top:calc(var(--c)*14);width:calc(var(--c)*16);height:calc(var(--c)*52);background:var(--hc);border-radius:calc(var(--c)*6) calc(var(--c)*6) 99px 99px;transform-origin:50% 0}
   .hr-down .inner i.hair::before{left:calc(var(--c)*-1);transform:rotate(5deg)}
@@ -159,8 +159,8 @@
   .piece.joy:not(.drag) .mouth::after{content:"";position:absolute;left:22%;right:22%;bottom:0;height:50%;background:#ff7a9a;border-radius:99px 99px 0 0}
   .piece.joy:not(.drag) .cheek{opacity:.9;width:calc(var(--u)*.16);height:calc(var(--u)*.1)}
   .piece.joy:not(.drag) .inner{scale:1.08}
-  .piece.a .inner{background:var(--bg,#f59e0b);border-color:var(--bd,#d97706)}
-  .piece.b .inner{background:var(--bg,#0ea5e9);border-color:var(--bd,#0284c7)}
+  .piece.a .inner{background:var(--bg,#fcd34d);border-color:var(--bd,#f0b429)}
+  .piece.b .inner{background:var(--bg,#38bdf8);border-color:var(--bd,#0ea5e9)}
   .piece:hover .inner{scale:1.06}
 
   /* ---------- personalities: Spider-Man ---------- */
@@ -251,8 +251,8 @@
   .piece.drag.c-tala .inner,.piece.drag.c-salma .inner,.piece.drag.c-jana .inner,.piece.drag.c-sama .inner{animation:none}
   /* characters switched off: plain coloured squares, no faces, no name tag */
   #stage.plain .inner > i{display:none!important}
-  #stage.plain .piece.a .inner{background:#f59e0b;border-color:#d97706}
-  #stage.plain .piece.b .inner{background:#0ea5e9;border-color:#0284c7}
+  #stage.plain .piece.a .inner{background:#fcd34d;border-color:#f0b429}
+  #stage.plain .piece.b .inner{background:#38bdf8;border-color:#0ea5e9}
   #stage.plain .piece .inner{animation:none!important;box-shadow:inset 0 0 0 calc(var(--u)*.035) rgba(255,255,255,.38)}
   #stage.plain .piece.drag .inner{box-shadow:0 calc(var(--u)*.1) calc(var(--u)*.14) rgba(17,24,39,.35),inset 0 0 0 calc(var(--u)*.035) rgba(255,255,255,.38)}
   #stage.plain #tag{display:none}
@@ -350,7 +350,7 @@
 
   #result{grid-column:1/-1;display:grid;place-items:center;min-height:48px;text-align:center;direction:ltr;border-radius:12px;border:1px solid transparent;transition:background .3s,border-color .3s}
   .eqline{font-size:clamp(19px,5.4vw,26px);font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
-  .eqline .o{color:var(--amber)}.eqline .b{color:var(--sky)}.eqline .t{color:var(--accent)}
+  .eqline .o{color:#fcd34d;text-shadow:1px 0 #a16207,-1px 0 #a16207,0 1px #a16207,0 -1px #a16207}.eqline .b{color:#38bdf8;text-shadow:1px 0 #0369a1,-1px 0 #0369a1,0 1px #0369a1,0 -1px #0369a1}.eqline .t{color:var(--accent)}
   .eqline .op{color:#9ca3af;font-weight:500;margin:0 .15em}
   .winline{display:none;align-items:center;gap:10px;color:#065f46;font-weight:600;font-size:13.5px;text-align:left;line-height:1.2}
   .winline svg{width:22px;height:22px;flex:none;stroke:#059669}
@@ -480,20 +480,20 @@
 <div class="bx cell" data-box="h" data-i="4" data-j="2" data-cx="2.3" data-cy="-5.1" style="--x:6.15;--y:2.85;--w:1;--h:1"></div>
 <div class="bx cell" data-box="h" data-i="4" data-j="3" data-cx="3.1" data-cy="-5.7" style="--x:6.95;--y:2.25;--w:1;--h:1"></div>
 <div class="bx cell" data-box="h" data-i="4" data-j="4" data-cx="3.9" data-cy="-6.3" style="--x:7.75;--y:1.65;--w:1;--h:1"></div>
-<div class="lbl" data-ar="٣² = ٩" style="--cx:5.85;--cy:12;--fs:.56;color:#D97706">3² = 9</div>
-<div class="lbl" data-ar="٤² = ١٦" style="--cx:2.35;--cy:3.95;--fs:.56;color:#0284C7">4² = 16</div>
+<div class="lbl" data-ar="٣² = ٩" style="--cx:5.85;--cy:12;--fs:.56;color:#1E1B4B;background:#fcd34d;padding:.1em .55em;border-radius:99px">3² = 9</div>
+<div class="lbl" data-ar="٤² = ١٦" style="--cx:2.35;--cy:3.95;--fs:.56;color:#1E1B4B;background:#38bdf8;padding:.1em .55em;border-radius:99px">4² = 16</div>
 <div class="lbl" data-ar="٥² = ٢٥" style="--cx:7.85;--cy:0.52;--fs:.62;color:#4F46E5">5² = 25</div>
       </div>
       <div id="layer">
-<div class="piece a c-nour rx-soft hr-hijab gl girl" data-kind="a" data-hx="0.5" data-hy="0.5" data-name="Ms. Nour" style="--x:4.85;--y:8.95;--r:0deg;--s:1;--hc:#0f766e;--bg:#fcd34d;--bd:#d97706"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
-<div class="piece a c-hamza rx-smile" data-kind="a" data-hx="1.5" data-hy="0.5" data-name="Mr. Hamza" style="--x:5.85;--y:8.95;--r:0deg;--s:1"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
-<div class="piece a c-mona rx-soft hr-hijab gl i-poised girl" data-kind="a" data-hx="2.5" data-hy="0.5" data-name="Ms. Mona" style="--x:6.85;--y:8.95;--r:0deg;--s:1;--hc:#64748b;--bg:#fcd34d;--bd:#d97706"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
-<div class="piece a c-somia rx-yap hr-hijab girl" data-kind="a" data-hx="0.5" data-hy="1.5" data-name="مس. سمية" style="--x:4.85;--y:9.95;--r:0deg;--s:1;--hc:#6d28d9;--bg:#fcd34d;--bd:#d97706"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
-<div class="piece a c-baraa rx-soft hr-hijab girl" data-kind="a" data-hx="1.5" data-hy="1.5" data-name="Ms. Baraa&#39;a" style="--x:5.85;--y:9.95;--r:0deg;--s:1;--hc:#1e3a8a;--bg:#fcd34d;--bd:#d97706"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
-<div class="piece a c-tasneem rx-bulb hr-hijab girl" data-kind="a" data-hx="2.5" data-hy="1.5" data-name="Ms. Tasneem" style="--x:6.85;--y:9.95;--r:0deg;--s:1;--hc:#15803d;--bg:#fcd34d;--bd:#d97706"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece a c-nour rx-soft hr-hijab gl girl" data-kind="a" data-hx="0.5" data-hy="0.5" data-name="Ms. Nour" style="--x:4.85;--y:8.95;--r:0deg;--s:1;--hc:#0f766e;--bg:#fcd34d;--bd:#f0b429"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece a c-hamza rx-smile" data-kind="a" data-hx="1.5" data-hy="0.5" data-name="Mr. Hamza" style="--x:5.85;--y:8.95;--r:0deg;--s:1;--bg:#fcd34d;--bd:#f0b429"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece a c-mona rx-soft hr-hijab gl i-poised girl" data-kind="a" data-hx="2.5" data-hy="0.5" data-name="Ms. Mona" style="--x:6.85;--y:8.95;--r:0deg;--s:1;--hc:#64748b;--bg:#fcd34d;--bd:#f0b429"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece a c-somia rx-yap hr-hijab girl" data-kind="a" data-hx="0.5" data-hy="1.5" data-name="مس. سمية" style="--x:4.85;--y:9.95;--r:0deg;--s:1;--hc:#6d28d9;--bg:#fcd34d;--bd:#f0b429"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece a c-baraa rx-soft hr-hijab girl" data-kind="a" data-hx="1.5" data-hy="1.5" data-name="Ms. Baraa&#39;a" style="--x:5.85;--y:9.95;--r:0deg;--s:1;--hc:#1e3a8a;--bg:#fcd34d;--bd:#f0b429"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece a c-tasneem rx-bulb hr-hijab girl" data-kind="a" data-hx="2.5" data-hy="1.5" data-name="Ms. Tasneem" style="--x:6.85;--y:9.95;--r:0deg;--s:1;--hc:#15803d;--bg:#fcd34d;--bd:#f0b429"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
 <div class="piece a c-ahed rx-chill hr-short i-small" data-kind="a" data-hx="0.5" data-hy="2.5" data-name="Ahed" style="--x:4.85;--y:10.95;--r:0deg;--s:1;--hc:#a16207;--bg:#fcd34d;--bd:#f0b429"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
 <div class="piece a c-azad rx-spidey spider" data-kind="a" data-hx="1.5" data-hy="2.5" data-name="Azad" style="--x:5.85;--y:10.95;--r:0deg;--s:1"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
-<div class="piece a c-diaa rx-scream hr-short" data-kind="a" data-hx="2.5" data-hy="2.5" data-name="Diaa&#39;" style="--x:6.85;--y:10.95;--r:0deg;--s:1;--hc:#7c2d12"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
+<div class="piece a c-diaa rx-scream hr-short" data-kind="a" data-hx="2.5" data-hy="2.5" data-name="Diaa&#39;" style="--x:6.85;--y:10.95;--r:0deg;--s:1;--hc:#7c2d12;--bg:#fcd34d;--bd:#f0b429"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
 <div class="piece b c-ismail rx-calm hr-short i-flat" data-kind="b" data-hx="-3.5" data-hy="-3.5" data-name="Ismail" style="--x:0.85;--y:4.95;--r:0deg;--s:1;--hc:#1f2937"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
 <div class="piece b c-jaad rx-scared hr-spiky" data-kind="b" data-hx="-2.5" data-hy="-3.5" data-name="Jaad" style="--x:1.85;--y:4.95;--r:0deg;--s:1;--hc:#111827"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
 <div class="piece b c-jana rx-glad hr-pony girl" data-kind="b" data-hx="-1.5" data-hy="-3.5" data-name="Jana" style="--x:2.85;--y:4.95;--r:0deg;--s:1;--hc:#7c4a2d"><div class="inner"><i class="hair"></i><i class="eye l"></i><i class="eye r"></i><i class="glasses"></i><i class="cheek l"></i><i class="cheek r"></i><i class="beard"></i><i class="mouth"></i><i class="acc"></i><i class="acc2"></i><i class="fx"></i><i class="sweat"></i></div></div>
@@ -518,8 +518,8 @@
 <div class="edge"  style="--cx:5.85;--cy:6.45;--len:5.12;--rot:53.13deg"></div>
 <div class="bx mark"  style="--x:4.35;--y:7.7;--w:0.75;--h:0.75"></div>
 <div class="lbl" data-ar="٩٠°" style="--cx:5.65;--cy:7.33;--fs:.34;color:#1E1B4B">90°</div>
-<div class="badge" data-ar="٣" style="--cx:5.85;--cy:8;background:#D97706">3</div>
-<div class="badge" data-ar="٤" style="--cx:4.8;--cy:6.45;background:#0284C7">4</div>
+<div class="badge" data-ar="٣" style="--cx:5.85;--cy:8;background:#fcd34d;color:#1E1B4B">3</div>
+<div class="badge" data-ar="٤" style="--cx:4.8;--cy:6.45;background:#38bdf8;color:#1E1B4B">4</div>
 <div class="badge" data-ar="٥" style="--cx:5.47;--cy:6.73;background:#4F46E5">5</div>
       </div>
       <div id="tag"></div>
@@ -529,14 +529,14 @@
 
 <section class="panel" aria-label="Progress">
   <div class="card">
-    <div class="lab"><i style="background:#f59e0b"></i><span data-ar="الضلع ٣">Side 3</span></div>
+    <div class="lab"><i style="background:#fcd34d"></i><span data-ar="الضلع ٣">Side 3</span></div>
     <div class="num"><span id="ca">0</span><small data-ar="/٩">/9</small></div>
-    <div class="bar"><span id="ba" style="background:#f59e0b"></span></div>
+    <div class="bar"><span id="ba" style="background:#fcd34d"></span></div>
   </div>
   <div class="card">
-    <div class="lab"><i style="background:#0ea5e9"></i><span data-ar="الضلع ٤">Side 4</span></div>
+    <div class="lab"><i style="background:#38bdf8"></i><span data-ar="الضلع ٤">Side 4</span></div>
     <div class="num"><span id="cb">0</span><small data-ar="/١٦">/16</small></div>
-    <div class="bar"><span id="bb" style="background:#0ea5e9"></span></div>
+    <div class="bar"><span id="bb" style="background:#38bdf8"></span></div>
   </div>
   <div class="card">
     <div class="lab"><i style="background:#4f46e5"></i><span data-ar="الوتر">Hypotenuse</span></div>
@@ -726,7 +726,7 @@ function place(p,c,n){                        // into the big square: sparkles, 
   popPut(n||0);                               // sound first, before any drawing work
   occupy(p,c);c.el.classList.add('full');
   stage.classList.add('started');
-  wobble(p);burst(c.c.x,c.c.y,p.kind==='a'?'#f59e0b':'#0ea5e9');
+  wobble(p);burst(c.c.x,c.c.y,p.kind==='a'?'#fcd34d':'#38bdf8');
   updateCount();wake();
 }
 function settle(p,s){popPut();occupy(p,s);wobble(p);wake()}           // into one of the two small boxes
